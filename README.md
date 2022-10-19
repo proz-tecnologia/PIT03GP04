@@ -1,6 +1,12 @@
-# four_finance_app
+# Four Finance App
 
-A new Flutter project.
+## Objetivo:
+
+**O app FF tem como objetivo ajudar seu usuário em sua organização financeira.**
+
+Idealizadores: Angelina Ottoni, Ana Claúdia, Ericson Sérgio e Léo Lourenço.
+
+*Projeto em desenvolvimento.*
 
 ## Getting Started
 
