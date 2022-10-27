@@ -24,6 +24,9 @@ class _NewTransactionPage extends State<NewTransactionPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Row(
+                // Desenvolver aqui Angel
+                ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 const SizedBox(width: 16),
