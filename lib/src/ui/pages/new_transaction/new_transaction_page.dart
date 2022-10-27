@@ -26,16 +26,26 @@ class _NewTransactionPage extends State<NewTransactionPage> {
             Row(
                 // Desenvolver aqui Angel
                 ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                const SizedBox(width: 16),
-                FloatingActionButton(
-                  onPressed: () {
-                    // print('Clicou');
-                    dialogTransaction(context);
-                  },
-                  child: const Icon(Icons.add),
+            Column(
+              children: [
+                // Row(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    // const SizedBox(width: 1),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      widthFactor: 6.2,
+                      heightFactor: 15.0,
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          // print('Clicou');
+                          dialogTransaction(context);
+                        },
+                        child: const Icon(Icons.add),
+                      ),
+                    )
+                  ],
                 )
               ],
             )
@@ -50,8 +60,9 @@ class _NewTransactionPage extends State<NewTransactionPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          insetPadding: const EdgeInsets.symmetric(horizontal: 1, vertical: 20),
           content: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -66,14 +77,12 @@ class _NewTransactionPage extends State<NewTransactionPage> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
+              Column(
+                children: const [
                   Divider(
-                    height: 20,
-                    thickness: 5,
-                    indent: 50,
+                    height: 25,
+                    thickness: 1,
+                    indent: 5,
                     endIndent: 0,
                     color: Colors.black,
                   ),
@@ -86,53 +95,53 @@ class _NewTransactionPage extends State<NewTransactionPage> {
     );
   }
 
-  void cardTransaction(BuildContext context) {
-    List<String> financialReleasesList = Transaction().financialRelease;
-    String dropdownValue = financialReleasesList.first;
+  // void cardTransaction(BuildContext context) {
+  //   List<String> financialReleasesList = Transaction().financialRelease;
+  //   String dropdownValue = financialReleasesList.first;
 
-    showDialog(
-      context: context,
-      builder: (context) => SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: Colors.blue[900],
-              ),
-              child: Row(
-                children: [
-                  DropdownButton<String>(
-                    value: dropdownValue,
-                    icon: const Icon(Icons.arrow_drop_down_circle),
-                    elevation: 16,
-                    style: TextStyle(
-                      color: Colors.amber[800],
-                    ),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.amber[800],
-                    ),
-                    onChanged: (String? value) {
-                      setState(() {
-                        dropdownValue = value!;
-                      });
-                    },
-                    items: financialReleasesList
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => SingleChildScrollView(
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: [
+  //           Container(
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(4),
+  //               color: Colors.blue[900],
+  //             ),
+  //             child: Row(
+  //               children: [
+  //                 DropdownButton<String>(
+  //                   value: dropdownValue,
+  //                   icon: const Icon(Icons.arrow_drop_down_circle),
+  //                   elevation: 16,
+  //                   style: TextStyle(
+  //                     color: Colors.amber[800],
+  //                   ),
+  //                   underline: Container(
+  //                     height: 2,
+  //                     color: Colors.amber[800],
+  //                   ),
+  //                   onChanged: (String? value) {
+  //                     setState(() {
+  //                       dropdownValue = value!;
+  //                     });
+  //                   },
+  //                   items: financialReleasesList
+  //                       .map<DropdownMenuItem<String>>((String value) {
+  //                     return DropdownMenuItem<String>(
+  //                       value: value,
+  //                       child: Text(value),
+  //                     );
+  //                   }).toList(),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
