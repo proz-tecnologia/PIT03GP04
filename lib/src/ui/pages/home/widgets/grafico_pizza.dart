@@ -29,36 +29,29 @@ class _GraficoPizzaState extends State<GraficoPizza> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Gráfico Pizza'),
-      ),
-      body: Center(
-        child: PieChart(
-          dataMap: listaValores,
-          colorList: listaCores,
-          //Definindo o tamanho da pizza
-          chartRadius: MediaQuery.of(context).size.width / 2,
-          centerText: 'Pd escrever algo no meio',
-          chartType: ChartType.ring,
-          ringStrokeWidth: 24,
-          animationDuration: const Duration(seconds: 3),
-          chartValuesOptions: const ChartValuesOptions(
-              //mostrar valores
-              showChartValues: true,
-              //mostrar valores fora do grafico
-              showChartValuesOutside: true,
-              //mostrar valores em porcentagem
-              showChartValuesInPercentage: false,
-              //mostrar o fundo dos valores
-              showChartValueBackground: false),
-          legendOptions: const LegendOptions(
-              showLegends: true,
-              legendShape: BoxShape.circle,
-              legendTextStyle: TextStyle(fontSize: 16)),
-        ),
-      ),
+    return PieChart(
+      dataMap: listaValores,
+      colorList: listaCores,
+      //Definindo o tamanho da pizza
+      chartRadius: MediaQuery.of(context).size.width / 2,
+      centerText: 'Overview',
+      chartType: ChartType.ring,
+      ringStrokeWidth: 24,
+      animationDuration: const Duration(seconds: 3),
+      chartValuesOptions: const ChartValuesOptions(
+          //mostrar valores
+          showChartValues: true,
+          //mostrar valores fora do grafico
+          showChartValuesOutside: true,
+          //mostrar valores em porcentagem
+          showChartValuesInPercentage: false,
+          //mostrar o fundo dos valores
+          showChartValueBackground: false),
+      legendOptions: const LegendOptions(
+          showLegends: true,
+          legendPosition: LegendPosition.bottom,
+          legendShape: BoxShape.circle,
+          legendTextStyle: TextStyle(fontSize: 12)),
     );
   }
 }
