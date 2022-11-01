@@ -7,7 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:four_finance_app/src/material_app.dart';
+import 'package:four_finance_app/main.dart';
+import 'package:four_finance_app/src/ui/pages/splash_page.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
