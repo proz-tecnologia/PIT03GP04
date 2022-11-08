@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:four_finance_app/src/ui/pages/new_transaction/new_transaction_page.dart';
+import 'package:four_finance_app/view/sidebar.view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,11 +10,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('Four Finances')),
-        body: const Center(
-          child: NewTransactionPage(),
+        body: Center(
+          child: SideBarView(),
         ),
       ),
     );
