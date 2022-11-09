@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:four_finance_app/view/transaction.view.dart';
 
 class SideBarView extends StatefulWidget {
   const SideBarView({super.key});
@@ -13,55 +14,74 @@ class _SideBarViewState extends State<SideBarView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Minhas finanças'),
-        backgroundColor: Colors.indigo.shade400,
+        backgroundColor: Colors.red,
       ),
       drawer: Drawer(
         width: 225,
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const [
-            DrawerHeader(
-              // Para ajustar o texto no box
-              // padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-              // margin: EdgeInsets.only(bottom: 1),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 92, 107, 192),
-              ),
-              child: Text(
-                'Minhas Finanças',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+          children: [
+            Column(
+              children: const [
+                UserAccountsDrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                  ),
+                  accountName: Text("Ana Clara"),
+                  accountEmail: Text("anaclara.dk@gmail.com"),
+                  currentAccountPicture: CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage: NetworkImage(
+                        'https://cdn.pixabay.com/photo/2015/03/03/08/55/portrait-657116_960_720.jpg'),
+                  ),
                 ),
-              ),
+              ],
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.account_balance),
               title: Text('Contas'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.credit_card_sharp),
               title: Text('Cartões'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.paid),
               title: Text('Lançamento'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.analytics),
               title: Text('Relatórios'),
             ),
-            Divider(
+            // Linha que divide as opções
+            const Divider(
               height: 20,
               thickness: 2,
               indent: 10,
               endIndent: 10,
-              color: Color.fromARGB(255, 92, 107, 192),
+              color: Colors.red,
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.sell),
               title: Text('Sonhos / Metas'),
             ),
+            // Linha que divide as opções
+            const SizedBox(
+              // width: 50.0,
+              height: 165.0,
+            ),
+            const Divider(
+              height: 20,
+              thickness: 2,
+              indent: 10,
+              endIndent: 10,
+              color: Colors.red,
+            ),
+            const ListTile(
+              leading: Icon(Icons.logout),
+              title: Text("Sair"),
+              focusColor: Colors.red,
+            )
           ],
         ),
       ),

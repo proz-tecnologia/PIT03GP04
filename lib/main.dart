@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:four_finance_app/view/sidebar.view.dart';
 
+import 'view/transaction.view.dart';
+
 void main() {
   runApp(const MyApp());
 }
