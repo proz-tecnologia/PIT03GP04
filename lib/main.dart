@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:four_finance_app/view/sidebar.view.dart';
-
+import 'view/home.view.dart';
 import 'view/transaction.view.dart';
 
 void main() {
@@ -12,12 +11,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: SideBarView(),
-        ),
-      ),
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomeView(),
+        '/transaction': (context) => const TransactionView(),
+      },
     );
   }
 }
