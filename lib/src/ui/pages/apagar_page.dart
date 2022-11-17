@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:four_finance_app/src/models/pagar.dart';
+import 'package:four_finance_app/src/models/pagar.model.dart';
 import 'package:four_finance_app/widget/lista_saida_item.dart';
 
 class PagarPage extends StatefulWidget {
-  PagarPage({super.key});
+  const PagarPage({super.key});
 
   @override
   State<PagarPage> createState() => _PagarPageState();
@@ -12,6 +12,8 @@ class PagarPage extends StatefulWidget {
 class _PagarPageState extends State<PagarPage> {
   //Responsavel por capturar o que o usuario digita
   final TextEditingController valorEntradaController = TextEditingController();
+  final TextEditingController descricaoEntradaController =
+      TextEditingController();
 
   List<Pagar> saida = [];
   Pagar? pagarDeletado;
@@ -35,10 +37,32 @@ class _PagarPageState extends State<PagarPage> {
             children: [
               TextField(
                 //Aqui pegamos o que foi digitado pelo usuairio
+                controller: descricaoEntradaController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    labelText: 'Descrição da saída',
+                    hintText: 'Ex.: Compra do almoço',
+                    labelStyle: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.w600,
+                    )),
+                keyboardType: TextInputType.text,
+                style: const TextStyle(fontSize: 20),
+                //Sempre q o usuairo digitar vai ser capturado
+                //onChanged: onChanged,
+                //onSubmitted: onSubmitted,
+              ),
+              const SizedBox(
+                width: 26,
+                height: 26,
+              ),
+              TextField(
+                //Aqui pegamos o que foi digitado pelo usuairio
                 controller: valorEntradaController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
                     labelText: 'Valor de saída',
                     prefixText: 'R\$   ',
                     hintText: 'Ex.: 25,00',
@@ -53,25 +77,33 @@ class _PagarPageState extends State<PagarPage> {
                 //onSubmitted: onSubmitted,
               ),
               const SizedBox(
-                width: 36,
-                height: 36,
+                width: 26,
+                height: 26,
               ),
               ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)))),
                 //Quando o usuario aperta o botao capturamos oq foi digitado
                 onPressed: () {
-                  String valor = valorEntradaController.text;
+                  double valor = valorEntradaController as double;
+                  String descricaoPagar = descricaoEntradaController.text;
                   //Serve p reconstruir a tela
                   setState(() {
-                    //Instaciamano a Classe Pagar
-                    Pagar newPagar = Pagar(value: valor, date: DateTime.now());
+                    //Instaciamano a Classe Pagar e adicionamos a listsa
+                    Pagar newPagar = Pagar(
+                        value: valor,
+                        date: DateTime.now(),
+                        descricao: descricaoPagar);
                     saida.add(newPagar);
                   });
                   valorEntradaController.clear();
+                  descricaoEntradaController.clear();
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Lançar'),
+                  children: const [
+                    Text('Lançar'),
                   ],
                 ),
               ),
@@ -117,13 +149,13 @@ class _PagarPageState extends State<PagarPage> {
         //Trabalhar p dps aparecer o dia q foi lançado a saida
         content: Text(
           'Valor de ${todo.value}, foi removido com sucesso.',
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
         backgroundColor: Colors.red,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         behavior: SnackBarBehavior.floating,
-        duration: Duration(seconds: 5),
+        duration: const Duration(seconds: 5),
         action: SnackBarAction(
           textColor: Colors.black,
           label: 'Voltar',

@@ -18,31 +18,8 @@ class ListaEntrada extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Slidable(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Color.fromARGB(255, 212, 209, 209),
-          ),
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                DateFormat('dd/MM/yyyy - HH:mm').format(receber.date),
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                receber.value,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-              )
-            ],
-          ),
-        ),
         actionExtentRatio: 0.25,
-        actionPane: SlidableDrawerActionPane(),
+        actionPane: const SlidableDrawerActionPane(),
         secondaryActions: [
           IconSlideAction(
             color: Colors.red,
@@ -54,6 +31,29 @@ class ListaEntrada extends StatelessWidget {
             },
           )
         ],
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: const Color.fromARGB(255, 212, 209, 209),
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                DateFormat('dd/MM/yyyy - HH:mm').format(receber.date),
+                style: const TextStyle(fontSize: 16),
+              ),
+              Text(
+                receber.value,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

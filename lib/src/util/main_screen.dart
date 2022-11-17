@@ -14,7 +14,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
-  final screen = [HomePage(), ReceberPage(), PagarPage(), CategoriaPage()];
+  final screen = [
+    const HomePage(),
+    const ReceberPage(),
+    const PagarPage(),
+    const CategoriaPage()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.black26,
         index: selectedIndex,
-        items: [
+        items: const [
           Icon(Icons.home_outlined, size: 30, color: Colors.blueAccent),
           Icon(Icons.add, size: 30, color: Colors.green),
           Icon(Icons.remove, size: 30, color: Colors.red),

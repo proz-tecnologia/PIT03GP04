@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -35,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         alignment: Alignment.topCenter,
         child: Card(
-          margin: EdgeInsets.all(32),
+          margin: const EdgeInsets.all(32),
           elevation: 25,
           surfaceTintColor: Colors.amber,
           shadowColor: Colors.black,
@@ -50,8 +48,8 @@ class _HomePageState extends State<HomePage> {
               //centerText: 'Pd escrever algo no meio',
               chartType: ChartType.ring,
               ringStrokeWidth: 24,
-              animationDuration: Duration(seconds: 3),
-              chartValuesOptions: ChartValuesOptions(
+              animationDuration: const Duration(seconds: 3),
+              chartValuesOptions: const ChartValuesOptions(
                   //mostrar valores
                   showChartValues: true,
                   //mostrar valores fora do grafico
@@ -60,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                   showChartValuesInPercentage: false,
                   //mostrar o fundo dos valores
                   showChartValueBackground: false),
-              legendOptions: LegendOptions(
+              legendOptions: const LegendOptions(
                   showLegends: true,
                   legendShape: BoxShape.circle,
                   legendTextStyle: TextStyle(fontSize: 16)),
