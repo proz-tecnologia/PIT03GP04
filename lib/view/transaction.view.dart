@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:four_finance_app/view/widgets/drawer.view.dart';
+import 'package:four_finance_app/view/widgets/pieChart.view.dart';
 
 import '../strings.dart';
 
@@ -63,6 +64,9 @@ class _TransactionViewState extends State<TransactionView> {
                   ),
                 ],
               ),
+              const SizedBox(height: 30),
+              // ? Inserindo o gráfico na página
+              const PieChartSample2()
             ],
           ),
         ),

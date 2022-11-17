@@ -17,13 +17,14 @@ class HomeView extends StatelessWidget {
       ),
       drawer: const DrawerView(),
       body: const Center(
-          child: Text(
-        "Home View",
-        style: TextStyle(
-          fontSize: 50,
-          color: Colors.amber,
+        child: Text(
+          "Home View",
+          style: TextStyle(
+            fontSize: 50,
+            color: Colors.amber,
+          ),
         ),
-      )),
+      ),
     );
   }
 }
