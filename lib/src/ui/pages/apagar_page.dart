@@ -3,7 +3,7 @@ import 'package:four_finance_app/src/models/pagar.dart';
 import 'package:four_finance_app/widget/lista_saida_item.dart';
 
 class PagarPage extends StatefulWidget {
-  PagarPage({super.key});
+  const PagarPage({super.key});
 
   @override
   State<PagarPage> createState() => _PagarPageState();
@@ -70,8 +70,8 @@ class _PagarPageState extends State<PagarPage> {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Lançar'),
+                  children: const [
+                    Text('Lançar'),
                   ],
                 ),
               ),
@@ -117,13 +117,13 @@ class _PagarPageState extends State<PagarPage> {
         //Trabalhar p dps aparecer o dia q foi lançado a saida
         content: Text(
           'Valor de ${todo.value}, foi removido com sucesso.',
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
         backgroundColor: Colors.red,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         behavior: SnackBarBehavior.floating,
-        duration: Duration(seconds: 5),
+        duration: const Duration(seconds: 5),
         action: SnackBarAction(
           textColor: Colors.black,
           label: 'Voltar',

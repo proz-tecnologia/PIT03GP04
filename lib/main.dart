@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:four_finance_app/src/ui/pages/apagar_page.dart';
 import 'package:four_finance_app/src/ui/pages/areceber_page.dart';
+import 'package:four_finance_app/src/ui/pages/cadLogin_page.dart';
 import 'package:four_finance_app/src/ui/pages/categoria_page.dart';
 import 'package:four_finance_app/src/util/main_screen.dart';
 import 'package:four_finance_app/src/ui/pages/login_page.dart';
@@ -12,6 +13,7 @@ void main() {
   runApp(const MyApp());
 }
 
+//mobx e flutter mobx
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -20,19 +22,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      home: SplashPage(),
+      //home: LoginPage(),
 
       //Página que o APP vai Starta
-      //initialRoute: '/splash',
+      initialRoute: '/login',
       //declaramos todas as rotas (páginas)
       routes: {
         '/splash': (_) => const SplashPage(),
-        '/login': (_) => LoginPage(),
-        '/mainScreen': (_) => MainScreen(),
-        '/home': (_) => HomePage(),
-        '/receber': (_) => ReceberPage(),
-        '/pagar': (_) => PagarPage(),
-        '/categoria': (_) => CategoriaPage(),
+        '/login': (_) => const LoginPage(),
+        '/cadUsuario': (_) => const CadUsuarioPage(),
+        '/mainScreen': (_) => const MainScreen(),
+        '/home': (_) => const HomePage(),
+        '/receber': (_) => const ReceberPage(),
+        '/pagar': (_) => const PagarPage(),
+        '/categoria': (_) => const CategoriaPage(),
       },
     );
   }

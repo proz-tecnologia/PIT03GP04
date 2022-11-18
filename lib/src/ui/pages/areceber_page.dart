@@ -3,7 +3,7 @@ import 'package:four_finance_app/src/models/receber.dart';
 import 'package:four_finance_app/widget/lista_receber_item.dart';
 
 class ReceberPage extends StatefulWidget {
-  ReceberPage({super.key});
+  const ReceberPage({super.key});
 
   @override
   State<ReceberPage> createState() => _ReceberPageState();
@@ -71,8 +71,8 @@ class _ReceberPageState extends State<ReceberPage> {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Lançar'),
+                  children: const [
+                    Text('Lançar'),
                   ],
                 ),
               ),
@@ -118,13 +118,13 @@ class _ReceberPageState extends State<ReceberPage> {
         //Trabalhar p dps aparecer o dia q foi lançado a entrada
         content: Text(
           'Valor de ${todo.value}, foi removido com sucesso.',
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
         backgroundColor: Colors.red,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         behavior: SnackBarBehavior.floating,
-        duration: Duration(seconds: 5),
+        duration: const Duration(seconds: 5),
         action: SnackBarAction(
           textColor: Colors.black,
           label: 'Voltar',
