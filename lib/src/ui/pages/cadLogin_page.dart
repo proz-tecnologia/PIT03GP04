@@ -1,3 +1,5 @@
+import 'package:four_finance_app/src/models/login_store.dart';
+import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,16 @@ class CadUsuarioPage extends StatefulWidget {
 }
 
 class _CadUsuarioPageState extends State<CadUsuarioPage> {
+  //Chamando a CLASSE LOGIN q contém o MOBX, foi removido (= LoginStore();), por conta do PROVIDER
+  late LoginStore loginStore;
+
+  //usado p transitar dados com MOBX o PROVIDER é necessário
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loginStore = Provider.of<LoginStore>(context);
+  }
+
   //chave global
   final _formKey = GlobalKey<FormState>();
   //Controlar dos campos digitaveis
@@ -17,6 +29,8 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
   final _senhaController = TextEditingController();
   final _confirmSenhaController = TextEditingController();
 
+  bool _canShowPassword = false;
+/*
   @override
   void dispose() {
     _nameUsuarioController.dispose();
@@ -25,7 +39,7 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
     _confirmSenhaController.dispose();
     super.dispose();
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +74,8 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                             Validatorless.min(5,
                                 'Nome do usuário deve ter no mínimo 5 caracteres.')
                           ]),
+                          //Faz parte do MOBX para setar o NOME USUARIO
+                          onChanged: loginStore.setNameUser,
                           controller: _nameUsuarioController,
                           cursorColor: Colors.red,
                           decoration: const InputDecoration(
@@ -88,6 +104,8 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                             Validatorless.required('E-mail obrigatório.'),
                             Validatorless.email('E-mail inválido.'),
                           ]),
+                          //Faz parte d MOBX p setar o EMAIL
+                          onChanged: loginStore.setEmail,
                           controller: _emailController,
                           cursorColor: Colors.red,
                           decoration: const InputDecoration(
@@ -114,68 +132,99 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                           validator: Validatorless.multiple([
                             Validatorless.required('Senha obrigatória.'),
                             Validatorless.min(
-                                5, 'Senha deve ter no mínimo 6 caracteres.')
+                                5, 'Senha deve ter no mínimo 5 caracteres.')
                           ]),
                           controller: _senhaController,
                           cursorColor: Colors.red,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                               labelText: 'Senha',
-                              labelStyle: TextStyle(color: Colors.red),
-                              border: OutlineInputBorder(
+                              labelStyle: const TextStyle(color: Colors.red),
+                              border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(16))),
-                              enabledBorder: OutlineInputBorder(
+                              enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.red),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(16))),
-                              prefixIcon: Icon(
+                              prefixIcon: const Icon(
                                 Icons.password,
                                 color: Colors.red,
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16)))),
-                          obscureText: true,
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.red),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(16),
+                                ),
+                              ),
+                              //exibir e escondr senha
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _canShowPassword = !_canShowPassword;
+                                  });
+                                },
+                                icon: Icon(
+                                  _canShowPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.red,
+                                ),
+                              )),
+                          obscureText: !_canShowPassword,
                         ),
                         const SizedBox(height: 24),
                         TextFormField(
                           validator: Validatorless.multiple([
                             Validatorless.required('Senha obrigatória.'),
                             Validatorless.min(
-                                6, 'Senha deve ter no mínimo 6 caracteres.'),
+                                5, 'Senha deve ter no mínimo 5 caracteres.'),
                             Validatorless.compare(_senhaController,
                                 'Senha diferente do confirma senha.')
                           ]),
                           controller: _confirmSenhaController,
                           cursorColor: Colors.red,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                               labelText: 'Repita a senha',
-                              labelStyle: TextStyle(color: Colors.red),
-                              border: OutlineInputBorder(
+                              labelStyle: const TextStyle(color: Colors.red),
+                              border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(16))),
-                              enabledBorder: OutlineInputBorder(
+                              enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.red),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(16))),
-                              prefixIcon: Icon(
+                              prefixIcon: const Icon(
                                 Icons.password,
                                 color: Colors.red,
                               ),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.red),
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(16)))),
-                          obscureText: true,
+                                      BorderRadius.all(Radius.circular(16))),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _canShowPassword = !_canShowPassword;
+                                  });
+                                },
+                                icon: Icon(
+                                  _canShowPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.red,
+                                ),
+                              )),
+                          obscureText: !_canShowPassword,
                         ),
                         const SizedBox(height: 24),
                         ElevatedButton(
                             onPressed: () {
-                              var formValid =
-                                  _formKey.currentState?.validate() ?? false;
-                              if (formValid) {
-                                //Implementar o CONTROLLER SALVAR DADOS
+                              // var formValid =
+                              //   _formKey.currentState?.validate() ?? false;
+                              //validação dos campos do formulario
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/home');
                               }
                             },
                             style: ElevatedButton.styleFrom(
