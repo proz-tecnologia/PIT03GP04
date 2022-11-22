@@ -48,9 +48,21 @@ class _TransactionViewState extends State<TransactionView> {
                         labelStyle: const TextStyle(color: Colors.white),
                         label: Text(e.label),
                         selected: e.type == _transactionType,
-                        onSelected: (value) => setState(() {
-                              _transactionType = e.type;
-                            })))
+                        onSelected: (value) => setState(
+                              () {
+                                _transactionType = e.type;
+                                showModalBottomSheet(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
+                                    context: context,
+                                    builder: (builder) {
+                                      return Wrap(
+                                        children: [Text('${e.label}')],
+                                      );
+                                    });
+                              },
+                            )))
                     .toList(),
               ),
 
