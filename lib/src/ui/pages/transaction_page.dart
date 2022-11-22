@@ -15,7 +15,7 @@ class TransactionView extends StatefulWidget {
 class _TransactionViewState extends State<TransactionView> {
   final _transactionTypes = [
     TransactionTypeOption('Entrada', TransactionType.INCOME, Colors.green),
-    TransactionTypeOption('Saída', TransactionType.INCOME, Colors.red)
+    TransactionTypeOption('Saída', TransactionType.EXPENSE, Colors.red)
   ];
 
   var _transactionType = TransactionType.INCOME;
