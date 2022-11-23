@@ -54,11 +54,22 @@ class _TransactionViewState extends State<TransactionView> {
                                 showModalBottomSheet(
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(16)),
+                                            BorderRadius.circular(25)),
                                     context: context,
                                     builder: (builder) {
                                       return Wrap(
-                                        children: [Text('${e.label}')],
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(18),
+                                            child: TextFormField(
+                                              cursorColor: e.color,
+                                              decoration: InputDecoration(
+                                                  labelText: 'Descrição',
+                                                  labelStyle: TextStyle(
+                                                      color: e.color)),
+                                            ),
+                                          ) /*Text('${e.label}')*/
+                                        ],
                                       );
                                     });
                               },

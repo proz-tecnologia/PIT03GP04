@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         //Página que o APP vai Starta
-        initialRoute: '/splash',
+        initialRoute: '/transaction',
         //declaramos todas as rotas (páginas)
         routes: {
           '/splash': (_) => const SplashPage(),
