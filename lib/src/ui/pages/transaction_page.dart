@@ -165,6 +165,7 @@ class _NewTransactionPageState extends State<TransactionPage> {
   }
 }
 
+// Tipo de transação
 class TransactionTypeOption {
   String label;
   TransactionType type;
