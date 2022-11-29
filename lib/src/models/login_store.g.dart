@@ -25,37 +25,6 @@ mixin _$LoginStore on _LoginStore, Store {
     });
   }
 
-  late final _$emailAtom = Atom(name: '_LoginStore.email', context: context);
-
-  @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
-  late final _$passwordAtom =
-      Atom(name: '_LoginStore.password', context: context);
-
-  @override
-  String get password {
-    _$passwordAtom.reportRead();
-    return super.password;
-  }
-
-  @override
-  set password(String value) {
-    _$passwordAtom.reportWrite(value, super.password, () {
-      super.password = value;
-    });
-  }
-
   late final _$_LoginStoreActionController =
       ActionController(name: '_LoginStore', context: context);
 
@@ -73,9 +42,7 @@ mixin _$LoginStore on _LoginStore, Store {
   @override
   String toString() {
     return '''
-nameUser: ${nameUser},
-email: ${email},
-password: ${password}
+nameUser: ${nameUser}
     ''';
   }
 }

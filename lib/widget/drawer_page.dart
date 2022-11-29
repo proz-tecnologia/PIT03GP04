@@ -37,24 +37,21 @@ class _DrawerViewState extends State<DrawerView> {
                   child: Observer(builder: (_) {
                     return UserAccountsDrawerHeader(
                       decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/background_drawer2.png'),
-                            fit: BoxFit.fill),
                         color: Colors.red,
                       ),
                       accountName: Text(
-                        'Seja bem-vindo(a),\n${loginStore.nameUser}',
+                        'Seja bem-vindo(a), ${loginStore.nameUser}',
                         style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: Colors.black),
+                            color: Colors.white),
                       ),
                       accountEmail: Text(
-                        '',
+                        '${loginStore.email}',
                         //Caso decidam exibir o email do usuario
-                        //loginStore.email,
+
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.w600),
                       ),

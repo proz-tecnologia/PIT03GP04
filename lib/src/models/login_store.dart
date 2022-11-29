@@ -9,8 +9,6 @@ abstract class _LoginStore with Store {
   _LoginStore() {
     autorun((_) {
       print(nameUser);
-      print(email);
-      print(password);
     });
   }
 

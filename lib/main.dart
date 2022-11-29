@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:four_finance_app/src/models/login_store.dart';
-import 'package:four_finance_app/src/ui/pages/apagar_page.dart';
-import 'package:four_finance_app/src/ui/pages/areceber_page.dart';
 import 'package:four_finance_app/src/ui/pages/cadLogin_page.dart';
 import 'package:four_finance_app/src/ui/pages/categoria_page.dart';
-import 'package:four_finance_app/src/ui/pages/drawer_page.dart';
+import 'package:four_finance_app/widget/drawer_page.dart';
 import 'package:four_finance_app/src/ui/pages/transaction_page.dart';
 import 'package:four_finance_app/src/ui/pages/login_page.dart';
 import 'package:four_finance_app/src/ui/pages/splash_page.dart';
 import 'package:provider/provider.dart';
 import 'src/ui/pages/home_page.dart';
+
+//https://github.com/R-A-S-E/provider_teste
 
 void main() {
   runApp(const MyApp());
@@ -24,12 +24,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<LoginStore>(create: (_) => LoginStore()),
+        //Provider<TransactionModel>(create: (_) => TransactionModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
         //Página que o APP vai Starta
-        initialRoute: '/transaction',
+        initialRoute: '/cadUsuario',
         //declaramos todas as rotas (páginas)
         routes: {
           '/splash': (_) => const SplashPage(),
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
           '/cadUsuario': (_) => const CadUsuarioPage(),
           '/drawer': (_) => const DrawerView(),
           '/home': (_) => const HomePage(),
-          '/transaction': (_) => const TransactionView(),
+          '/transaction': (_) => TransactionPage(),
           //'/receber': (_) => const ReceberPage(),
           //'/pagar': (_) => const PagarPage(),
           '/categoria': (_) => const CategoriaPage(),

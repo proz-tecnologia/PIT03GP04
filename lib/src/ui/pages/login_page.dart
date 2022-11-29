@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
     loginStore = Provider.of<LoginStore>(context);
   }
 
-  //Chave do formulario
+  //Chave do formulario p usar em validar os campos
   final _formKey = GlobalKey<FormState>();
 
   bool _canShowPassword = false;
@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                     reverse: true,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
+                      children: <Widget>[
                         ClipRRect(
                           child: Image.asset(
                             'assets/logo_for_finance2.png',
@@ -53,6 +53,13 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         const SizedBox(height: 32),
+                        /* Trabalhando em criar WIDGETs TEXTFORMFIELD e diminuir o código
+                        TextFormFieldPadron(
+                          prefixIcon: Icons.email,
+                          color: Colors.red,
+                          labelText: 'E-mail',
+                        ),*/
+
                         TextFormField(
                           //Usando VALIDATORLESS
                           validator: Validatorless.multiple([
@@ -90,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                             Validatorless.min(
                                 5, 'Senha deve ter no mínimo 5 caracteres.')
                           ]),
-                          //Pegando o SET da CLASSE OGIN com MOBX
+                          //Pegando o SET da CLASSE LOGIN com MOBX
                           onChanged: loginStore.setPassword,
                           cursorColor: Colors.red,
                           decoration: InputDecoration(
