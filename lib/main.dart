@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:four_finance_app/controller/transaction.controller.dart';
 import 'package:four_finance_app/src/models/login_store.dart';
 import 'package:four_finance_app/src/ui/pages/cadLogin_page.dart';
 import 'package:four_finance_app/src/ui/pages/categoria_page.dart';
@@ -9,10 +10,11 @@ import 'package:four_finance_app/src/ui/pages/splash_page.dart';
 import 'package:provider/provider.dart';
 import 'src/ui/pages/home_page.dart';
 
-//https://github.com/R-A-S-E/provider_teste
-
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => TransactionController(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,13 +26,12 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<LoginStore>(create: (_) => LoginStore()),
-        //Provider<TransactionModel>(create: (_) => TransactionModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
 
         //Página que o APP vai Starta
-        initialRoute: '/cadUsuario',
+        initialRoute: '/transaction',
         //declaramos todas as rotas (páginas)
         routes: {
           '/splash': (_) => const SplashPage(),

@@ -1,21 +1,19 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:four_finance_app/controller/transaction.controller.dart';
 import 'package:four_finance_app/src/models/transaction.model.dart';
 import 'package:four_finance_app/widget/drawer_page.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
 class TransactionPage extends StatefulWidget {
-  TransactionPage({super.key});
+  const TransactionPage({super.key});
 
   @override
   State<TransactionPage> createState() => _NewTransactionPageState();
 }
 
 class _NewTransactionPageState extends State<TransactionPage> {
-  //Aqui instanciamos a HOME CONTROLLER q vai ter a lisata OBSERVEBLE
-  //Instanciamos a HOME CONTROLLER
-
   final _transactionTypes = [
     TransactionTypeOption("Receita", TransactionType.INCOME, Colors.green),
     TransactionTypeOption("Despesa", TransactionType.EXPENSE, Colors.red)
@@ -24,7 +22,7 @@ class _NewTransactionPageState extends State<TransactionPage> {
   final _formKey = GlobalKey<FormState>();
 
   var _transactionType = TransactionType.INCOME;
-  var _value = 0.0;
+  var _valueTransaction = 0.0;
   var _description = "";
   var _dateTime = DateTime.now();
 
@@ -73,7 +71,6 @@ class _NewTransactionPageState extends State<TransactionPage> {
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(16)))),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: Validatorless.multiple([
                         Validatorless.required('Campo descrição obrigatório.'),
                         Validatorless.min(5, 'No minímo 5 caracteres'),
@@ -90,7 +87,6 @@ class _NewTransactionPageState extends State<TransactionPage> {
                         CurrencyTextInputFormatter(
                             locale: "pt_BR", decimalDigits: 2, symbol: '')
                       ],
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius:
@@ -103,7 +99,7 @@ class _NewTransactionPageState extends State<TransactionPage> {
                         Validatorless.min(1, 'No minímo 1 caracter'),
                         Validatorless.max(10, 'No máximo 10 caracteres')
                       ]),
-                      onSaved: (newValue) => _value = double.parse(
+                      onSaved: (newValue) => _valueTransaction = double.parse(
                           newValue!.replaceAll('.', '').replaceAll(',', '.')),
                     ),
                     const SizedBox(
@@ -117,15 +113,8 @@ class _NewTransactionPageState extends State<TransactionPage> {
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(16)))),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator:
                           Validatorless.required('Campo data obrigatório'),
-                      /*validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Informe uma data.";
-                  }
-                  return null;
-                },*/
                       onTap: () async {
                         FocusScope.of(context).requestFocus(FocusNode());
                         DateTime? date = await showDatePicker(
@@ -146,16 +135,32 @@ class _NewTransactionPageState extends State<TransactionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('Lançar')),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              final newTransaction = Transaction(
+                                  transactionType: _transactionType,
+                                  dateTime: _dateTime,
+                                  description: _description,
+                                  valueTransaction: _valueTransaction);
+                              //chamando o PROVEDIR da TRANSACTIONCONTROLLER q possui as açoes
+                              Provider.of<TransactionController>(context,
+                                      listen: false)
+                                  .add(newTransaction);
+                              // print(newTransaction);
+
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/transaction');
+                            }
+                          },
+                          child: const Text('Lançar'),
+                        ),
                         ElevatedButton(
                             onPressed: () {
                               Navigator.of(context)
                                   .pushReplacementNamed('/home');
                             },
-                            child: Text('Cancelar'))
+                            child: Text('Cancelar')),
                       ],
                     ),
                   ]),

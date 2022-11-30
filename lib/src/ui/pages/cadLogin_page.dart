@@ -225,8 +225,6 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                               if (_formKey.currentState!.validate()) {
                                 Navigator.of(context)
                                     .pushReplacementNamed('/home');
-                                print(_nameUsuarioController.text);
-                                print(_emailController.text);
                               }
                             },
                             style: ElevatedButton.styleFrom(

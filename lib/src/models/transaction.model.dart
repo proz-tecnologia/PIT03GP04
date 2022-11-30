@@ -10,12 +10,12 @@ class Transaction {
   double valueTransaction;
 
   //Necessario ter o construtor dos atributos da classe
-  Transaction(
-    this.transactionType,
+  Transaction({
+    this.transactionType = TransactionType.INCOME,
     this.dateTime,
-    this.description,
-    this.valueTransaction,
-  );
+    this.description = '',
+    this.valueTransaction = 0,
+  });
 }
 
 enum TransactionType { INCOME, EXPENSE }

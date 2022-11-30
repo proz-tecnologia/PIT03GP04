@@ -1,7 +1,14 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:four_finance_app/controller/transaction.controller.dart';
+import 'package:four_finance_app/src/models/transaction.model.dart';
+import 'package:four_finance_app/src/util/string.dart';
+import 'package:four_finance_app/widget/card.pattern.widget.dart';
 import 'package:four_finance_app/widget/drawer_page.dart';
-import 'package:four_finance_app/widget/itemWidget.dart';
+import 'package:four_finance_app/widget/item.transaction.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,70 +39,110 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-      ),
-      drawer: const DrawerView(),
-      body: ListView.builder(
-        itemCount: 6,
-        itemBuilder: (_, index) {
-          ;
-          //Retornamos o ITEMWIDGET q tem o OBERSERVEBLE
-          return ItemWidget(item: null);
-        },
-      ), /*Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(0),
-            child: Container(
-              alignment: Alignment.topCenter,
-              child: Card(
-                margin: const EdgeInsets.all(32),
-                elevation: 25,
-                surfaceTintColor: Colors.amber,
-                shadowColor: Colors.black,
-                child: SizedBox(
-                  width: 450,
-                  height: 300,
-                  child: PieChart(
-                    dataMap: listaValores,
-                    colorList: listaCores,
-                    //Definindo o tamanho da pizza
-                    chartRadius: MediaQuery.of(context).size.width / 3,
-                    //centerText: 'Pd escrever algo no meio',
-                    chartType: ChartType.ring,
-                    ringStrokeWidth: 24,
-                    animationDuration: const Duration(seconds: 3),
-                    chartValuesOptions: const ChartValuesOptions(
-                        //mostrar valores
-                        showChartValues: true,
-                        //mostrar valores fora do grafico
-                        showChartValuesOutside: true,
-                        //mostrar valores em porcentagem
-                        showChartValuesInPercentage: false,
-                        //mostrar o fundo dos valores
-                        showChartValueBackground: false),
-                    legendOptions: const LegendOptions(
-                        showLegends: true,
-                        legendShape: BoxShape.circle,
-                        legendTextStyle: TextStyle(fontSize: 16)),
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text('Home Page'),
+          centerTitle: true,
+        ),
+        drawer: const DrawerView(),
+        body: Consumer<TransactionController>(
+            builder: (context, transactionController, child) =>
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CardPattern(Text('Entrada'), Colors.green,
+                              transactionController.getTotalIncoming),
+                          //Card valor entrada - despesas
+                          CardPattern(
+                              Text('Resultado'),
+                              Colors.white,
+                              transactionController.getTotalIncoming -
+                                  transactionController.getTotalOutcoming),
+                          //Card valor de saída
+                          CardPattern(Text('Saída'), Colors.red,
+                              transactionController.getTotalOutcoming),
+                        ],
+                      ),
+                      ListView.builder(
+                        //aqui resolveu o erro q n estava aparecendo
+                        shrinkWrap: true,
+                        itemBuilder: (_, index) => Dismissible(
+                          key: ValueKey<Transaction>(
+                              transactionController.transactions[index]),
+                          //direction: DismissDirection.endToStart,
+                          resizeDuration: Duration(seconds: 1),
+                          child: ItemTransaction(
+                            transactionController.transactions[index],
+                            key: ValueKey<int>(index),
+                          ),
+                        ),
+                        itemCount: transactionController.transactions.length,
+                      )
+                    ],
                   ),
-                  //child: Center(),
-                ),
+
+                  /*ListView.builder(
+    itemCount: 6,
+    itemBuilder: (_, index) {
+      //Retornamos o ITEMWIDGET q tem o OBERSERVEBLE
+      return ItemWidget(item: null);
+    },
+      ),*/ /*Column(
+    children: [
+      Padding(
+        padding: const EdgeInsets.all(0),
+        child: Container(
+          alignment: Alignment.topCenter,
+          child: Card(
+            margin: const EdgeInsets.all(32),
+            elevation: 25,
+            surfaceTintColor: Colors.amber,
+            shadowColor: Colors.black,
+            child: SizedBox(
+              width: 450,
+              height: 300,
+              child: PieChart(
+                dataMap: listaValores,
+                colorList: listaCores,
+                //Definindo o tamanho da pizza
+                chartRadius: MediaQuery.of(context).size.width / 3,
+                //centerText: 'Pd escrever algo no meio',
+                chartType: ChartType.ring,
+                ringStrokeWidth: 24,
+                animationDuration: const Duration(seconds: 3),
+                chartValuesOptions: const ChartValuesOptions(
+                    //mostrar valores
+                    showChartValues: true,
+                    //mostrar valores fora do grafico
+                    showChartValuesOutside: true,
+                    //mostrar valores em porcentagem
+                    showChartValuesInPercentage: false,
+                    //mostrar o fundo dos valores
+                    showChartValueBackground: false),
+                legendOptions: const LegendOptions(
+                    showLegends: true,
+                    legendShape: BoxShape.circle,
+                    legendTextStyle: TextStyle(fontSize: 16)),
               ),
+              //child: Center(),
             ),
           ),
-          SizedBox(height: 24),
-          ListView.builder(
-            itemCount: 6,
-            itemBuilder: (_, index) {
-              return ItemWidget();
-            },
-          ),
-        ],
+        ),
+      ),
+      SizedBox(height: 24),
+      ListView.builder(
+        itemCount: 6,
+        itemBuilder: (_, index) {
+          return ItemWidget();
+        },
+      ),
+    ],
       ),*/
-    ));
+                )));
   }
 }
