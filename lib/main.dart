@@ -11,8 +11,11 @@ import 'package:provider/provider.dart';
 import 'src/ui/pages/home_page.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => TransactionController(),
+  runApp(MultiProvider(
+    providers: [
+      Provider<LoginStore>(create: (_) => LoginStore()),
+      Provider<TransactionController>(create: (_) => TransactionController()),
+    ],
     child: const MyApp(),
   ));
 }
