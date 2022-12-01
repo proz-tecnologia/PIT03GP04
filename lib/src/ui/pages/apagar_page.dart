@@ -34,7 +34,7 @@ class _PagarPageState extends State<PagarPage> {
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                //Aqui pegamos o que foi digitado pelo usuairio
+                //Aqui pegamos o que foi digitado pelo usuario
                 controller: valorEntradaController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(

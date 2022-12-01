@@ -26,7 +26,7 @@ class ListaEntrada extends StatelessWidget {
             icon: Icons.cancel_outlined,
             caption: 'Remover',
             onTap: () {
-              //O filho recebe do pai areceber_page.dart
+              //O filho recebe do pai a receber_page.dart
               onDelete(receber);
             },
           )

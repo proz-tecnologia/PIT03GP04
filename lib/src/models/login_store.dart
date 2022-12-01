@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:flutter/foundation.dart';
 
 part 'login_store.g.dart';
 
@@ -8,7 +9,7 @@ abstract class _LoginStore with Store {
   //Reaçao da TRIADE do MOBX, podemos usar em outras telas
   _LoginStore() {
     autorun((_) {
-      print(nameUser);
+      debugPrint(nameUser);
     });
   }
 
