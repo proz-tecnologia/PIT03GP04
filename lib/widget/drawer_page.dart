@@ -46,8 +46,8 @@ class _DrawerViewState extends State<DrawerView> {
                             fontWeight: FontWeight.w600,
                             color: Colors.white),
                       ),
-                      accountEmail: Text(
-                        '${loginStore.email}',
+                      accountEmail: const Text(
+                        'loginStore.email',
                         //Caso decidam exibir o email do usuario
 
                         style: TextStyle(

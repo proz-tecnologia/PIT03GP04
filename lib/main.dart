@@ -11,11 +11,8 @@ import 'package:provider/provider.dart';
 import 'src/ui/pages/home_page.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      Provider<LoginStore>(create: (_) => LoginStore()),
-      Provider<TransactionController>(create: (_) => TransactionController()),
-    ],
+  runApp(ChangeNotifierProvider(
+    create: (context) => TransactionController(),
     child: const MyApp(),
   ));
 }
@@ -42,7 +39,7 @@ class MyApp extends StatelessWidget {
           '/cadUsuario': (_) => const CadUsuarioPage(),
           '/drawer': (_) => const DrawerView(),
           '/home': (_) => const HomePage(),
-          '/transaction': (_) => TransactionPage(),
+          '/transaction': (_) => const TransactionPage(),
           //'/receber': (_) => const ReceberPage(),
           //'/pagar': (_) => const PagarPage(),
           '/categoria': (_) => const CategoriaPage(),
@@ -51,5 +48,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// Só pra atualizar repo.

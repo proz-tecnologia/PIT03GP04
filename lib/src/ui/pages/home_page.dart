@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:four_finance_app/controller/transaction.controller.dart';
 import 'package:four_finance_app/src/models/transaction.model.dart';
-import 'package:four_finance_app/src/util/string.dart';
 import 'package:four_finance_app/widget/card.pattern.widget.dart';
 import 'package:four_finance_app/widget/drawer_page.dart';
 import 'package:four_finance_app/widget/item.transaction.dart';
-import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,7 +38,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
-          title: Text('Home Page'),
+          title: const Text('Home Page'),
           centerTitle: true,
         ),
         drawer: const DrawerView(),
@@ -53,16 +51,16 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          CardPattern(Text('Entrada'), Colors.green,
+                          CardPattern(const Text('Entrada'), Colors.green,
                               transactionController.getTotalIncoming),
                           //Card valor entrada - despesas
                           CardPattern(
-                              Text('Resultado'),
+                              const Text('Resultado'),
                               Colors.white,
                               transactionController.getTotalIncoming -
                                   transactionController.getTotalOutcoming),
                           //Card valor de saída
-                          CardPattern(Text('Saída'), Colors.red,
+                          CardPattern(const Text('Saída'), Colors.red,
                               transactionController.getTotalOutcoming),
                         ],
                       ),
@@ -72,8 +70,10 @@ class _HomePageState extends State<HomePage> {
                         itemBuilder: (_, index) => Dismissible(
                           key: ValueKey<Transaction>(
                               transactionController.transactions[index]),
-                          //direction: DismissDirection.endToStart,
-                          resizeDuration: Duration(seconds: 1),
+                          direction: DismissDirection.endToStart,
+                          resizeDuration: const Duration(seconds: 1),
+                          onDismissed: (direction) =>
+                              transactionController.removeByPosition(index),
                           child: ItemTransaction(
                             transactionController.transactions[index],
                             key: ValueKey<int>(index),

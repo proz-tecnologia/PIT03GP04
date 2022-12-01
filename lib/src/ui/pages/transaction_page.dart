@@ -160,7 +160,7 @@ class _NewTransactionPageState extends State<TransactionPage> {
                               Navigator.of(context)
                                   .pushReplacementNamed('/home');
                             },
-                            child: Text('Cancelar')),
+                            child: const Text('Cancelar')),
                       ],
                     ),
                   ]),

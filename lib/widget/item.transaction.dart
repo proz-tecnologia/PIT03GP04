@@ -14,7 +14,7 @@ class ItemTransaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       elevation: 16,
       shadowColor: Colors.black,
       child: ListTile(
@@ -35,13 +35,13 @@ class ItemTransaction extends StatelessWidget {
                     children: <Widget>[
                       IconButton(
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit,
                             color: Colors.amber,
                           )),
                       IconButton(
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.remove_circle_outlined,
                             color: Colors.red,
                           ))

@@ -12,12 +12,12 @@ class CardPattern extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       elevation: 16,
       shadowColor: Colors.black,
       child: Container(
         color: color,
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             text,
