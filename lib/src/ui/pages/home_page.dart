@@ -42,49 +42,50 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
         ),
         drawer: const DrawerView(),
-        body: Consumer<TransactionController>(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Consumer<TransactionController>(
             builder: (context, transactionController, child) =>
                 SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CardPattern(const Text('Entrada'), Colors.green,
-                              transactionController.getTotalIncoming),
-                          //Card valor entrada - despesas
-                          CardPattern(
-                              const Text('Resultado'),
-                              Colors.white,
-                              transactionController.getTotalIncoming -
-                                  transactionController.getTotalOutcoming),
-                          //Card valor de saída
-                          CardPattern(const Text('Saída'), Colors.red,
+                      CardPattern(const Text('Entrada'), Colors.green,
+                          transactionController.getTotalIncoming),
+                      //Card valor entrada - despesas
+                      CardPattern(
+                          const Text('Resultado'),
+                          Colors.white,
+                          transactionController.getTotalIncoming -
                               transactionController.getTotalOutcoming),
-                        ],
-                      ),
-                      ListView.builder(
-                        //aqui resolveu o erro q n estava aparecendo
-                        shrinkWrap: true,
-                        itemBuilder: (_, index) => Dismissible(
-                          key: ValueKey<Transaction>(
-                              transactionController.transactions[index]),
-                          direction: DismissDirection.endToStart,
-                          resizeDuration: const Duration(seconds: 1),
-                          onDismissed: (direction) =>
-                              transactionController.removeByPosition(index),
-                          child: ItemTransaction(
-                            transactionController.transactions[index],
-                            key: ValueKey<int>(index),
-                          ),
-                        ),
-                        itemCount: transactionController.transactions.length,
-                      )
+                      //Card valor de saída
+                      CardPattern(const Text('Saída'), Colors.red,
+                          transactionController.getTotalOutcoming),
                     ],
                   ),
+                  ListView.builder(
+                      //aqui resolveu o erro q n estava aparecendo
+                      shrinkWrap: true,
+                      itemBuilder: (_, index) => Dismissible(
+                            key: ValueKey<Transaction>(
+                                transactionController.transactions[index]),
+                            direction: DismissDirection.endToStart,
+                            resizeDuration: const Duration(seconds: 1),
+                            onDismissed: (direction) =>
+                                transactionController.removeByPosition(index),
+                            child: ItemTransaction(
+                              transactionController.transactions[index],
+                              key: ValueKey<int>(index),
+                            ),
+                          ),
+                      itemCount: transactionController.transactions.length)
+                ],
+              ),
 
-                  /*ListView.builder(
+              /*ListView.builder(
     itemCount: 6,
     itemBuilder: (_, index) {
       //Retornamos o ITEMWIDGET q tem o OBERSERVEBLE
@@ -93,54 +94,56 @@ class _HomePageState extends State<HomePage> {
       ),*/ /*Column(
     children: [
       Padding(
-        padding: const EdgeInsets.all(0),
-        child: Container(
-          alignment: Alignment.topCenter,
-          child: Card(
-            margin: const EdgeInsets.all(32),
-            elevation: 25,
-            surfaceTintColor: Colors.amber,
-            shadowColor: Colors.black,
-            child: SizedBox(
-              width: 450,
-              height: 300,
-              child: PieChart(
-                dataMap: listaValores,
-                colorList: listaCores,
-                //Definindo o tamanho da pizza
-                chartRadius: MediaQuery.of(context).size.width / 3,
-                //centerText: 'Pd escrever algo no meio',
-                chartType: ChartType.ring,
-                ringStrokeWidth: 24,
-                animationDuration: const Duration(seconds: 3),
-                chartValuesOptions: const ChartValuesOptions(
-                    //mostrar valores
-                    showChartValues: true,
-                    //mostrar valores fora do grafico
-                    showChartValuesOutside: true,
-                    //mostrar valores em porcentagem
-                    showChartValuesInPercentage: false,
-                    //mostrar o fundo dos valores
-                    showChartValueBackground: false),
-                legendOptions: const LegendOptions(
-                    showLegends: true,
-                    legendShape: BoxShape.circle,
-                    legendTextStyle: TextStyle(fontSize: 16)),
+            padding: const EdgeInsets.all(0),
+            child: Container(
+              alignment: Alignment.topCenter,
+              child: Card(
+                margin: const EdgeInsets.all(32),
+                elevation: 25,
+                surfaceTintColor: Colors.amber,
+                shadowColor: Colors.black,
+                child: SizedBox(
+                  width: 450,
+                  height: 300,
+                  child: PieChart(
+                    dataMap: listaValores,
+                    colorList: listaCores,
+                    //Definindo o tamanho da pizza
+                    chartRadius: MediaQuery.of(context).size.width / 3,
+                    //centerText: 'Pd escrever algo no meio',
+                    chartType: ChartType.ring,
+                    ringStrokeWidth: 24,
+                    animationDuration: const Duration(seconds: 3),
+                    chartValuesOptions: const ChartValuesOptions(
+                        //mostrar valores
+                        showChartValues: true,
+                        //mostrar valores fora do grafico
+                        showChartValuesOutside: true,
+                        //mostrar valores em porcentagem
+                        showChartValuesInPercentage: false,
+                        //mostrar o fundo dos valores
+                        showChartValueBackground: false),
+                    legendOptions: const LegendOptions(
+                        showLegends: true,
+                        legendShape: BoxShape.circle,
+                        legendTextStyle: TextStyle(fontSize: 16)),
+                  ),
+                  //child: Center(),
+                ),
               ),
-              //child: Center(),
             ),
-          ),
-        ),
       ),
       SizedBox(height: 24),
       ListView.builder(
-        itemCount: 6,
-        itemBuilder: (_, index) {
-          return ItemWidget();
-        },
+            itemCount: 6,
+            itemBuilder: (_, index) {
+              return ItemWidget();
+            },
       ),
     ],
       ),*/
-                )));
+            ),
+          ),
+        ));
   }
 }

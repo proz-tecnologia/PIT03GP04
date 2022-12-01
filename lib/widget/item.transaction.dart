@@ -13,26 +13,31 @@ class ItemTransaction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-      margin: const EdgeInsets.all(16),
-      elevation: 16,
-      shadowColor: Colors.black,
-      child: ListTile(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        margin: const EdgeInsets.all(16),
+        elevation: 16,
+        shadowColor: Colors.black,
+        child: ListTile(
           leading: Text(
             '${transaction.dateTime?.day}/${transaction.dateTime?.month}/${transaction.dateTime?.year}',
+            style: TextStyle(color: getColor()),
           ),
           //'${widget.transactionStore.dateTime?.day}/${widget.transactionStore.dateTime?.month}'),
-          isThreeLine: true,
-          title: Text(transaction.description),
+          //isThreeLine: true,
+          title: Text(
+            transaction.description,
+            style: TextStyle(color: getColor()),
+          ),
           //Tá no final esse GET
-          subtitle: Text(getValue()),
-          trailing: FittedBox(
+          //subtitle: Text(getValue(), style: TextStyle(color: getColor())),
+          trailing: Text(getValue(), style: TextStyle(color: getColor())),
+          /*trailing: FittedBox(
               fit: BoxFit.fill,
               child: Consumer<TransactionController>(
                 builder: (context, transactinController, child) =>
                     SingleChildScrollView(
                   child: Row(
-                    children: <Widget>[
+                      children: <Widget>[
                       IconButton(
                           onPressed: () {},
                           icon: const Icon(
@@ -46,10 +51,10 @@ class ItemTransaction extends StatelessWidget {
                             color: Colors.red,
                           ))
                     ],
-                  ),
+                      ),
                 ),
-              ))),
-    );
+              ))),*/
+        ));
   }
 
   //Pegando o valor da transação e o tipo
@@ -59,6 +64,16 @@ class ItemTransaction extends StatelessWidget {
         return transaction.valueTransaction.formatBRL;
       case TransactionType.EXPENSE:
         return "(${transaction.valueTransaction.formatBRL})";
+    }
+  }
+
+  //Pengando a cor da transação
+  Color getColor() {
+    switch (transaction.transactionType) {
+      case TransactionType.INCOME:
+        return Colors.green;
+      case TransactionType.EXPENSE:
+        return Colors.red;
     }
   }
 }
