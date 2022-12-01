@@ -51,5 +51,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// Só pra atualizar repo.
