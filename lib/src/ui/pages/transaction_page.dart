@@ -2,7 +2,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:four_finance_app/controller/transaction.controller.dart';
 import 'package:four_finance_app/src/models/transaction.model.dart';
-import 'package:four_finance_app/widget/drawer_page.dart';
+import 'package:four_finance_app/login/ui/component/drawer_page.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 

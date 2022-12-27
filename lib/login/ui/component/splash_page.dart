@@ -1,7 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:four_finance_app/src/ui/pages/login_page.dart';
 import 'package:lottie/lottie.dart';
+
+import '../pages/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

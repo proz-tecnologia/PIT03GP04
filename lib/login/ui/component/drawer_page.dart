@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:four_finance_app/src/models/login_store.dart';
 import 'package:four_finance_app/src/util/string.dart';
 import 'package:provider/provider.dart';
+
+import '../../data/models/login_store.dart';
 
 class DrawerView extends StatefulWidget {
   const DrawerView({super.key});

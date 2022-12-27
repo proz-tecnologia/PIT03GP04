@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:four_finance_app/controller/transaction.controller.dart';
 import 'package:four_finance_app/extension/extension.double.dart';
 import 'package:four_finance_app/src/models/transaction.model.dart';
-import 'package:provider/provider.dart';
 
 //esse widget vai popular a lista da home com tds as transaçoes
 class ItemTransaction extends StatelessWidget {
