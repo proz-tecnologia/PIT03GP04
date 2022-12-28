@@ -49,87 +49,97 @@ class _HomePageState extends State<HomePage> {
               SingleChildScrollView(
             child: Card(
               borderOnForeground: true,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                      border: Border.all(
-                        width: 18.0,
+              color: Colors.transparent,
+              // shape: const RoundedRectangleBorder(
+              //   side: BorderSide(
+              //     color: Colors.black26,
+              //     width: 2.0,
+              //   ),
+              // ),
+              child: InkWell(
+                onTap: () => {debugPrint('Teste')},
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
                         color: const Color.fromRGBO(255, 255, 255, 1),
+                        border: Border.all(
+                          width: 18.0,
+                          color: const Color.fromRGBO(255, 255, 255, 1),
+                        ),
+                      ),
+                      child: const Text(
+                        "Lançamentos",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                    child: const Text(
-                      "Lançamentos",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: const Color.fromARGB(255, 3, 158, 3),
-                      border: Border.all(
-                        width: 18.0,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
                         color: const Color.fromARGB(255, 3, 158, 3),
+                        border: Border.all(
+                          width: 18.0,
+                          color: const Color.fromARGB(255, 3, 158, 3),
+                        ),
+                      ),
+                      child: const Text(
+                        "Entrada",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                    child: const Text(
-                      "Entrada",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: const Color.fromRGBO(255, 0, 0, 1),
-                      border: Border.all(
-                        width: 18.0,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
                         color: const Color.fromRGBO(255, 0, 0, 1),
+                        border: Border.all(
+                          width: 18.0,
+                          color: const Color.fromRGBO(255, 0, 0, 1),
+                        ),
+                      ),
+                      child: const Text(
+                        "Saída",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                    child: const Text(
-                      "Saída",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: const Color.fromARGB(255, 134, 126, 126),
+                        border: Border.all(
+                          width: 18.0,
+                          color: const Color.fromARGB(255, 134, 126, 126),
+                        ),
+                      ),
+                      child: const Text(
+                        "Saldo",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: const Color.fromARGB(255, 219, 212, 212),
-                      border: Border.all(
-                        width: 18.0,
-                        color: const Color.fromARGB(255, 219, 212, 212),
-                      ),
-                    ),
-                    child: const Text(
-                      "Saldo",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
