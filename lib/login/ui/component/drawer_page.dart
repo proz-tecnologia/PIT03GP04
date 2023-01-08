@@ -27,7 +27,6 @@ class _DrawerViewState extends State<DrawerView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Drawer(
-        // width: 225,
         child: Center(
           child: Column(
             children: [

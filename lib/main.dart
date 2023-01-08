@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:four_finance_app/contas_receber/ui/pages/contas_receber.dart';
 import 'package:four_finance_app/controller/transaction.controller.dart';
 import 'package:four_finance_app/login/ui/component/drawer_page.dart';
 import 'package:four_finance_app/src/ui/pages/transaction_page.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
           '/drawer': (_) => const DrawerView(),
           '/home': (_) => const HomePage(),
           '/transaction': (_) => const TransactionPage(),
+          '/contas_receber': (_) => const ContasReceber(),
         },
       ),
     );

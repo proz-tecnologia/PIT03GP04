@@ -19,9 +19,11 @@ class CardValuesHome extends StatelessWidget {
           ),
           child: InkWell(
             // ? Debug de teste
-            onTap: () => (debugPrint('RECEITA')),
+            onTap: () {
+              Navigator.pushNamed(context, '/contas_receber');
+            },
             child: SizedBox(
-              width: 5000,
+              width: 400,
               height: 100,
               child: Column(
                 mainAxisSize: MainAxisSize.max,

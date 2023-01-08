@@ -84,6 +84,18 @@ class _HomePageState extends State<HomePage> {
                 ),
                 // ? Chamando a tela de cards com lançamento
                 CardValuesReleases(),
+                SizedBox(
+                  height: 10,
+                ),
+                CardValuesReleases(),
+                SizedBox(
+                  height: 10,
+                ),
+                CardValuesReleases(),
+                SizedBox(
+                  height: 10,
+                ),
+                CardValuesReleases(),
               ],
             ),
           ),
