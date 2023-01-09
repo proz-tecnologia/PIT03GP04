@@ -69,9 +69,11 @@ class CardValuesHome extends StatelessWidget {
           ),
           child: InkWell(
             // ? Debug de teste
-            onTap: () => (debugPrint('DESPESA')),
+            onTap: () {
+              Navigator.pushNamed(context, '/contas_pagar');
+            },
             child: SizedBox(
-              width: 5000,
+              width: 400,
               height: 100,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -119,7 +121,7 @@ class CardValuesHome extends StatelessWidget {
             // ? Debug de teste
             onTap: () => (debugPrint('SALDO')),
             child: SizedBox(
-              width: 5000,
+              width: 400,
               height: 100,
               child: Column(
                 mainAxisSize: MainAxisSize.max,

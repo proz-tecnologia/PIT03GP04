@@ -6,6 +6,7 @@ import 'package:four_finance_app/src/ui/pages/transaction_page.dart';
 import 'package:four_finance_app/login/ui/component/splash_page.dart';
 import 'package:provider/provider.dart';
 
+import 'contas_pagar/ui/pages/contas_pagar.dart';
 import 'home/ui/pages/home_page.dart';
 import 'login/data/models/login_store.dart';
 import 'login/ui/pages/cadLogin_page.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           '/home': (_) => const HomePage(),
           '/transaction': (_) => const TransactionPage(),
           '/contas_receber': (_) => const ContasReceber(),
+          '/contas_pagar': (_) => const ContasPagar(),
         },
       ),
     );
