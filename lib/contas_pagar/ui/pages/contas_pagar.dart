@@ -51,36 +51,34 @@ class ContasPagar extends StatelessWidget {
                 endIndent: 10,
                 color: Colors.red,
               ),
-              Container(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: const [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      CardValuesReleases(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CardValuesReleases(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CardValuesReleases(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CardValuesReleases(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CardValuesReleases(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CardValuesReleases(),
-                    ],
-                  ),
+              SingleChildScrollView(
+                child: Column(
+                  children: const [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    CardValuesReleases(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CardValuesReleases(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CardValuesReleases(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CardValuesReleases(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CardValuesReleases(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CardValuesReleases(),
+                  ],
                 ),
               ),
             ],

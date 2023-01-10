@@ -10,7 +10,7 @@ class ContasReceber extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: const Text('Contas a Receber'),
+        title: const Text('Receitas'),
       ),
       drawer: const DrawerView(),
       body: Padding(
