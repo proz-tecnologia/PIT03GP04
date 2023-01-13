@@ -77,25 +77,14 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                           //Faz parte do MOBX para setar o NOME USUARIO
                           onChanged: loginStore.setNameUser,
                           controller: _nameUsuarioController,
-                          cursorColor: Colors.red,
                           decoration: const InputDecoration(
                             labelText: 'Nome Usuário',
-                            labelStyle: TextStyle(color: Colors.red),
                             border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(16))),
                             prefixIcon: Icon(
                               Icons.person,
-                              color: Colors.red,
                             ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16))),
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -107,25 +96,15 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                           //Faz parte d MOBX p setar o EMAIL
                           onChanged: loginStore.setEmail,
                           controller: _emailController,
-                          cursorColor: Colors.red,
                           decoration: const InputDecoration(
-                              labelText: 'E-mail',
-                              labelStyle: TextStyle(color: Colors.red),
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16))),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16))),
-                              prefixIcon: Icon(
-                                Icons.email,
-                                color: Colors.red,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16)))),
+                            labelText: 'E-mail',
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16))),
+                            prefixIcon: Icon(
+                              Icons.email,
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 24),
                         TextFormField(
@@ -135,26 +114,13 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                                 5, 'Senha deve ter no mínimo 5 caracteres.')
                           ]),
                           controller: _senhaController,
-                          cursorColor: Colors.red,
                           decoration: InputDecoration(
                               labelText: 'Senha',
-                              labelStyle: const TextStyle(color: Colors.red),
                               border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16))),
-                              enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(16))),
                               prefixIcon: const Icon(
                                 Icons.password,
-                                color: Colors.red,
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(16),
-                                ),
                               ),
                               //exibir e escondr senha
                               suffixIcon: IconButton(
@@ -167,7 +133,6 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                                   _canShowPassword
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Colors.red,
                                 ),
                               )),
                           obscureText: !_canShowPassword,
@@ -182,25 +147,15 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                                 'Senha diferente do confirma senha.')
                           ]),
                           controller: _confirmSenhaController,
-                          cursorColor: Colors.red,
                           decoration: InputDecoration(
                               labelText: 'Repita a senha',
-                              labelStyle: const TextStyle(color: Colors.red),
                               border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16))),
-                              enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(16))),
                               prefixIcon: const Icon(
                                 Icons.password,
-                                color: Colors.red,
+                                //color: Colors.red,
                               ),
-                              focusedBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16))),
                               suffixIcon: IconButton(
                                 onPressed: () {
                                   setState(() {
@@ -211,25 +166,33 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                                   _canShowPassword
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Colors.red,
                                 ),
                               )),
                           obscureText: !_canShowPassword,
                         ),
                         const SizedBox(height: 24),
-                        ElevatedButton(
-                            onPressed: () {
-                              // var formValid =
-                              //   _formKey.currentState?.validate() ?? false;
-                              //validação dos campos do formulario
-                              if (_formKey.currentState!.validate()) {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/home');
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red),
-                            child: const Text('CRIAR CONTA')),
+                        SizedBox(
+                          width: 190,
+                          height: 60,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                // var formValid =
+                                //   _formKey.currentState?.validate() ?? false;
+                                //validação dos campos do formulario
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.of(context)
+                                      .pushReplacementNamed('/home');
+                                }
+                              },
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.red),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16)))),
+                              child: const Text('CRIAR CONTA')),
+                        ),
                         const SizedBox(height: 24),
                         const Text(
                           'Já possui uma conta ?',

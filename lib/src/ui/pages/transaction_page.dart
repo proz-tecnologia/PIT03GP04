@@ -45,25 +45,28 @@ class _NewTransactionPageState extends State<TransactionPage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 24,
-                    ),
+                    const SizedBox(height: 32),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: _transactionTypes
-                          .map((e) => ChoiceChip(
-                              selectedColor: e.color,
-                              labelStyle: const TextStyle(color: Colors.white),
-                              label: Text(e.label),
-                              selected: e.type == _transactionType,
-                              onSelected: (value) => setState(() {
-                                    _transactionType = e.type;
-                                  })))
+                          .map(
+                            (e) => ChoiceChip(
+                                selectedColor: e.color,
+                                labelStyle:
+                                    const TextStyle(color: Colors.white),
+                                label: Container(
+                                    alignment: AlignmentDirectional.center,
+                                    width: 180,
+                                    height: 60,
+                                    child: Text(e.label)),
+                                selected: e.type == _transactionType,
+                                onSelected: (value) => setState(() {
+                                      _transactionType = e.type;
+                                    })),
+                          )
                           .toList(),
                     ),
-                    const SizedBox(
-                      height: 32,
-                    ),
+                    const SizedBox(height: 32),
                     TextFormField(
                       // onChanged: modelTransaction,
                       decoration: const InputDecoration(
@@ -78,9 +81,7 @@ class _NewTransactionPageState extends State<TransactionPage> {
                       ]),
                       onSaved: ((newValue) => _description = newValue!),
                     ),
-                    const SizedBox(
-                      height: 24,
-                    ),
+                    const SizedBox(height: 32),
                     TextFormField(
                       keyboardType: TextInputType.number,
                       inputFormatters: [
@@ -102,9 +103,7 @@ class _NewTransactionPageState extends State<TransactionPage> {
                       onSaved: (newValue) => _valueTransaction = double.parse(
                           newValue!.replaceAll('.', '').replaceAll(',', '.')),
                     ),
-                    const SizedBox(
-                      height: 24,
-                    ),
+                    const SizedBox(height: 32),
                     TextFormField(
                       controller: _txtDateTimeController,
                       keyboardType: TextInputType.datetime,
@@ -128,39 +127,59 @@ class _NewTransactionPageState extends State<TransactionPage> {
                             "${_dateTime.day}/${_dateTime.month}/${_dateTime.year}";
                       },
                     ),
-                    const SizedBox(
-                      height: 24,
-                    ),
+                    const SizedBox(height: 32),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-                              final newTransaction = Transaction(
-                                  transactionType: _transactionType,
-                                  dateTime: _dateTime,
-                                  description: _description,
-                                  valueTransaction: _valueTransaction);
-                              //chamando o PROVEDIR da TRANSACTIONCONTROLLER q possui as açoes
-                              Provider.of<TransactionController>(context,
-                                      listen: false)
-                                  .add(newTransaction);
-                              // print(newTransaction);
-
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/transaction');
-                            }
-                          },
-                          child: const Text('Lançar'),
-                        ),
-                        ElevatedButton(
+                        SizedBox(
+                          width: 190,
+                          height: 60,
+                          child: ElevatedButton(
                             onPressed: () {
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/home');
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                final newTransaction = Transaction(
+                                    transactionType: _transactionType,
+                                    dateTime: _dateTime,
+                                    description: _description,
+                                    valueTransaction: _valueTransaction);
+                                //chamando o PROVEDIR da TRANSACTIONCONTROLLER q possui as açoes
+                                Provider.of<TransactionController>(context,
+                                        listen: false)
+                                    .add(newTransaction);
+                                // print(newTransaction);
+
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/transaction');
+                              }
                             },
-                            child: const Text('Cancelar')),
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.blue),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(90)))),
+                            child: const Text('Lançar'),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 190,
+                          height: 60,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/home');
+                              },
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.blue),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(90)))),
+                              child: const Text('Cancelar')),
+                        ),
                       ],
                     ),
                   ]),
