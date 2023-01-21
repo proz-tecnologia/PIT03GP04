@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:four_finance_app/src/models/login_store.dart';
-import 'package:four_finance_app/src/util/string.dart';
+import 'package:four_finance_app/Transaction/src/util/string.dart';
+import 'package:four_finance_app/login/data/providers/login_store.dart';
 import 'package:provider/provider.dart';
 
 class DrawerView extends StatefulWidget {
@@ -12,10 +12,10 @@ class DrawerView extends StatefulWidget {
 }
 
 class _DrawerViewState extends State<DrawerView> {
-  //Chamando a CLASSE LOGIN q contém o MOBX, foi removido (= LoginStore();), por conta do PROVIDER
+  //Todo: Chamando a CLASSE LOGIN q contém o MOBX, foi removido (= LoginStore();), por conta do PROVIDER
   late LoginStore loginStore;
 
-  //usado p transitar dados com MOBX o PROVIDER é necessário
+  //Todo: usado p transitar dados com MOBX o PROVIDER é necessário
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -31,38 +31,39 @@ class _DrawerViewState extends State<DrawerView> {
           child: Column(
             children: [
               Container(
-                  color: Colors.white,
-                  height: 200,
-                  //Td esse WIDGET esta sendo observad com MOBX
-                  child: Observer(builder: (_) {
-                    return UserAccountsDrawerHeader(
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                      ),
-                      accountName: Text(
-                        'Seja bem-vindo(a), ${loginStore.nameUser}',
-                        style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
-                      ),
-                      accountEmail: Text(
-                        '${loginStore.email}',
-                        //Caso decidam exibir o email do usuario
+                color: Colors.white,
+                height: 200,
+                //Todo: Td esse WIDGET esta sendo observad com MOBX
+                child: Observer(builder: (_) {
+                  return UserAccountsDrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                    ),
+                    accountName: Text(
+                      'Seja bem-vindo(a), ${loginStore.nameUser}',
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
+                    accountEmail: Text(
+                      '${loginStore.email}',
+                      //Caso decidam exibir o email do usuario
 
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    currentAccountPicture: const CircleAvatar(
+                      radius: 30.0,
+                      backgroundImage: NetworkImage(
+                        'https://cdn.pixabay.com/photo/2015/03/03/08/55/portrait-657116_960_720.jpg',
                       ),
-                      currentAccountPicture: const CircleAvatar(
-                        radius: 30.0,
-                        backgroundImage: NetworkImage(
-                          'https://cdn.pixabay.com/photo/2015/03/03/08/55/portrait-657116_960_720.jpg',
-                        ),
-                      ),
-                    );
-                  })),
+                    ),
+                  );
+                }),
+              ),
               Expanded(
                 child: Container(
                   color: Colors.white,

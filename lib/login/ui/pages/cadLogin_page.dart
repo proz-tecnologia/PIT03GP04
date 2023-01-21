@@ -1,4 +1,4 @@
-import 'package:four_finance_app/src/models/login_store.dart';
+import 'package:four_finance_app/login/data/providers/login_store.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +11,10 @@ class CadUsuarioPage extends StatefulWidget {
 }
 
 class _CadUsuarioPageState extends State<CadUsuarioPage> {
-  //Chamando a CLASSE LOGIN q contém o MOBX, foi removido (= LoginStore();), por conta do PROVIDER
+  //Todo: Chamando a CLASSE LOGIN q contém o MOBX, foi removido (= LoginStore();), por conta do PROVIDER
   late LoginStore loginStore;
 
-  //usado p transitar dados com MOBX o PROVIDER é necessário
+  //? usado p transitar dados com MOBX o PROVIDER é necessário
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -30,16 +30,7 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
   final _confirmSenhaController = TextEditingController();
 
   bool _canShowPassword = false;
-/*
-  @override
-  void dispose() {
-    _nameUsuarioController.dispose();
-    _emailController.dispose();
-    _senhaController.dispose();
-    _confirmSenhaController.dispose();
-    super.dispose();
-  }
-*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +65,7 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                             Validatorless.min(5,
                                 'Nome do usuário deve ter no mínimo 5 caracteres.')
                           ]),
-                          //Faz parte do MOBX para setar o NOME USUARIO
+                          //? Faz parte do MOBX para setar o NOME USUARIO
                           onChanged: loginStore.setNameUser,
                           controller: _nameUsuarioController,
                           decoration: const InputDecoration(
@@ -93,7 +84,7 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                             Validatorless.required('E-mail obrigatório.'),
                             Validatorless.email('E-mail inválido.'),
                           ]),
-                          //Faz parte d MOBX p setar o EMAIL
+                          //? Faz parte d MOBX p setar o EMAIL
                           onChanged: loginStore.setEmail,
                           controller: _emailController,
                           decoration: const InputDecoration(
@@ -148,26 +139,28 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                           ]),
                           controller: _confirmSenhaController,
                           decoration: InputDecoration(
-                              labelText: 'Repita a senha',
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16))),
-                              prefixIcon: const Icon(
-                                Icons.password,
-                                //color: Colors.red,
+                            labelText: 'Repita a senha',
+                            border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16),
                               ),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _canShowPassword = !_canShowPassword;
-                                  });
-                                },
-                                icon: Icon(
-                                  _canShowPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                              )),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.password,
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _canShowPassword = !_canShowPassword;
+                                });
+                              },
+                              icon: Icon(
+                                _canShowPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                            ),
+                          ),
                           obscureText: !_canShowPassword,
                         ),
                         const SizedBox(height: 24),
@@ -175,23 +168,24 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                           width: 190,
                           height: 60,
                           child: ElevatedButton(
-                              onPressed: () {
-                                // var formValid =
-                                //   _formKey.currentState?.validate() ?? false;
-                                //validação dos campos do formulario
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.of(context)
-                                      .pushReplacementNamed('/home');
-                                }
-                              },
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.red),
-                                  shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16)))),
-                              child: const Text('CRIAR CONTA')),
+                            onPressed: () {
+                              //? validação dos campos do formulario
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/home');
+                              }
+                            },
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.red),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                              ),
+                            ),
+                            child: const Text('CRIAR CONTA'),
+                          ),
                         ),
                         const SizedBox(height: 24),
                         const Text(
