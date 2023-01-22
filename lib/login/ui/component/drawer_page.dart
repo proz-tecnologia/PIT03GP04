@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:four_finance_app/Transaction/src/util/string.dart';
-import 'package:four_finance_app/login/data/providers/login_store.dart';
 import 'package:provider/provider.dart';
+
+import '../../../Transaction/src/util/string.dart';
+import '../../data/models/login_store.dart';
 
 class DrawerView extends StatefulWidget {
   const DrawerView({super.key});
@@ -26,7 +27,6 @@ class _DrawerViewState extends State<DrawerView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Drawer(
-        // width: 225,
         child: Center(
           child: Column(
             children: [
@@ -48,7 +48,7 @@ class _DrawerViewState extends State<DrawerView> {
                     ),
                     accountEmail: Text(
                       '${loginStore.email}',
-                      //Caso decidam exibir o email do usuario
+                      //Todo: Caso decidam exibir o email do usuario
 
                       style: const TextStyle(
                           color: Colors.white,

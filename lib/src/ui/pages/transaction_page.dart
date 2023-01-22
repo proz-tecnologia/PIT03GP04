@@ -1,11 +1,11 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:four_finance_app/Transaction/controller/transaction.controller.dart';
+import 'package:four_finance_app/login/ui/component/drawer_page.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
-import '../../../login/ui/component/drawer_page.dart';
-import '../../models/transaction.model.dart';
+import '../../../Transaction/controller/transaction.controller.dart';
+import '../../../Transaction/models/transaction.model.dart';
 
 class TransactionPage extends StatefulWidget {
   const TransactionPage({super.key});
@@ -45,33 +45,33 @@ class _NewTransactionPageState extends State<TransactionPage> {
             key: _formKey,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const SizedBox(height: 32),
+              const SizedBox(
+                height: 24,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: _transactionTypes
-                    .map(
-                      (e) => ChoiceChip(
-                          selectedColor: e.color,
-                          labelStyle: const TextStyle(color: Colors.white),
-                          label: Container(
-                              alignment: AlignmentDirectional.center,
-                              width: 180,
-                              height: 60,
-                              child: Text(e.label)),
-                          selected: e.type == _transactionType,
-                          onSelected: (value) => setState(() {
-                                _transactionType = e.type;
-                              })),
-                    )
+                    .map((e) => ChoiceChip(
+                        selectedColor: e.color,
+                        labelStyle: const TextStyle(color: Colors.white),
+                        label: Text(e.label),
+                        selected: e.type == _transactionType,
+                        onSelected: (value) => setState(() {
+                              _transactionType = e.type;
+                            })))
                     .toList(),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(
+                height: 32,
+              ),
               TextFormField(
                 // onChanged: modelTransaction,
                 decoration: const InputDecoration(
                   labelText: "Descrição",
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(16),
+                    ),
                   ),
                 ),
                 validator: Validatorless.multiple([
@@ -81,16 +81,24 @@ class _NewTransactionPageState extends State<TransactionPage> {
                 ]),
                 onSaved: ((newValue) => _description = newValue!),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(
+                height: 24,
+              ),
               TextFormField(
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   CurrencyTextInputFormatter(
-                      locale: "pt_BR", decimalDigits: 2, symbol: '')
+                    locale: "pt_BR",
+                    decimalDigits: 2,
+                    symbol: '',
+                  )
                 ],
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
                     labelText: "Valor",
                     hintText: "0,00",
                     prefix: Text("R\$  ")),
@@ -102,14 +110,18 @@ class _NewTransactionPageState extends State<TransactionPage> {
                 onSaved: (newValue) => _valueTransaction = double.parse(
                     newValue!.replaceAll('.', '').replaceAll(',', '.')),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(
+                height: 24,
+              ),
               TextFormField(
                 controller: _txtDateTimeController,
                 keyboardType: TextInputType.datetime,
                 decoration: const InputDecoration(
                   labelText: "Data da Operação",
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(16),
+                    ),
                   ),
                 ),
                 validator: Validatorless.required('Campo data obrigatório'),
@@ -126,60 +138,37 @@ class _NewTransactionPageState extends State<TransactionPage> {
                       "${_dateTime.day}/${_dateTime.month}/${_dateTime.year}";
                 },
               ),
-              const SizedBox(height: 32),
+              const SizedBox(
+                height: 24,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
-                    width: 190,
-                    height: 60,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          final newTransaction = Transaction(
-                              transactionType: _transactionType,
-                              dateTime: _dateTime,
-                              description: _description,
-                              valueTransaction: _valueTransaction);
-                          //Todo: Chamando o PROVEDIR da TRANSACTIONCONTROLLER q possui as açoes
-                          Provider.of<TransactionController>(context,
-                                  listen: false)
-                              .add(newTransaction);
-                          // print(newTransaction);
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        final newTransaction = Transaction(
+                            transactionType: _transactionType,
+                            dateTime: _dateTime,
+                            description: _description,
+                            valueTransaction: _valueTransaction);
+                        //Todo: Chamando o PROVEDIR da TRANSACTIONCONTROLLER q possui as açoes
+                        Provider.of<TransactionController>(context,
+                                listen: false)
+                            .add(newTransaction);
 
-                          Navigator.of(context)
-                              .pushReplacementNamed('/transaction');
-                        }
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.blue),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(90),
-                          ),
-                        ),
-                      ),
-                      child: const Text('Lançar'),
-                    ),
+                        Navigator.of(context)
+                            .pushReplacementNamed('/transaction');
+                      }
+                    },
+                    child: const Text('Lançar'),
                   ),
-                  SizedBox(
-                    width: 190,
-                    height: 60,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed('/home');
-                        },
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.blue),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(90),
-                            ),
-                          ),
-                        ),
-                        child: const Text('Cancelar')),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed('/home');
+                    },
+                    child: const Text('Cancelar'),
                   ),
                 ],
               ),
@@ -191,7 +180,7 @@ class _NewTransactionPageState extends State<TransactionPage> {
   }
 }
 
-//Todo: Tipo de transação
+// Tipo de transação
 class TransactionTypeOption {
   String label;
   TransactionType type;

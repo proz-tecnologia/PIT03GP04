@@ -1,7 +1,10 @@
-import 'package:four_finance_app/login/data/providers/login_store.dart';
+// ignore_for_file: file_names
+
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:flutter/material.dart';
+
+import '../../../login/data/models/login_store.dart';
 
 class CadUsuarioPage extends StatefulWidget {
   const CadUsuarioPage({super.key});

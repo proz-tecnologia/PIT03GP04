@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:four_finance_app/Transaction/controller/transaction.controller.dart';
-import 'package:four_finance_app/login/data/providers/login_store.dart';
-import 'package:four_finance_app/login/ui/pages/cadLogin_page.dart';
-import 'package:four_finance_app/widget/drawer_page.dart';
-import 'package:four_finance_app/Transaction/ui/pages/transaction_page.dart';
-import 'package:four_finance_app/login/ui/pages/login_page.dart';
-import 'package:four_finance_app/login/ui/pages/splash_page.dart';
+import 'package:four_finance_app/contas_pagar/ui/pages/contas_pagar.dart';
+import 'package:four_finance_app/contas_receber/ui/pages/contas_receber.dart';
+import 'package:four_finance_app/login/ui/component/drawer_page.dart';
+import 'package:four_finance_app/src/ui/pages/transaction_page.dart';
+import 'package:four_finance_app/login/ui/component/splash_page.dart';
 import 'package:provider/provider.dart';
 
 import 'home/ui/pages/home_page.dart';
+import 'login/data/models/login_store.dart';
+import 'login/ui/pages/cadLogin_page.dart';
+import 'login/ui/pages/login_page.dart';
 
 void main() {
   runApp(
-    const MyApp(),
+    ChangeNotifierProvider(
+      create: (context) => TransactionController(),
+      child: const MyApp(),
+    ),
   );
 }
 
@@ -40,6 +45,8 @@ class MyApp extends StatelessWidget {
           '/drawer': (_) => const DrawerView(),
           '/home': (_) => const HomePage(),
           '/transaction': (_) => const TransactionPage(),
+          '/contas_receber': (_) => const ContasReceber(),
+          '/contas_pagar': (_) => const ContasPagar(),
         },
       ),
     );

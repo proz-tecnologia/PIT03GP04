@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:four_finance_app/login/data/providers/login_store.dart';
-import 'package:four_finance_app/widget/text.form.field.padrao.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
+
+import '../../data/models/login_store.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

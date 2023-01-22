@@ -2,7 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../pages/login_page.dart';
+import '../../login/ui/pages/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -15,7 +15,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    //Todo: Após 4 segundos a tela splash vai ser destruída. PushReplacementNamed é para não retornar a tela
+    //Após 4 segundos a tela splash vai ser destruída. PushReplacementNamed é para não retornar a tela
     Future.delayed(const Duration(seconds: 4))
         .then((_) => Navigator.of(context).pushReplacementNamed('/login'));
   }

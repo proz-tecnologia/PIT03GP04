@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:four_finance_app/Transaction/controller/transaction.controller.dart';
-import 'package:four_finance_app/widget/card.pattern.widget.dart';
-import 'package:four_finance_app/widget/drawer_page.dart';
-import 'package:four_finance_app/Transaction/item.transaction.dart';
+import 'package:four_finance_app/home/ui/component/card_values_home.dart';
+import 'package:four_finance_app/login/ui/component/drawer_page.dart';
 import 'package:provider/provider.dart';
 
-import '../../../Transaction/models/transaction.model.dart';
+import '../../../Transaction/controller/transaction.controller.dart';
+import '../component/cards_values_releases.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,45 +43,59 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: const DrawerView(),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 10.0),
         child: Consumer<TransactionController>(
           builder: (context, transactionController, child) =>
               SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CardPattern(const Text('Entrada'), Colors.green,
-                        transactionController.getTotalIncoming),
-                    //Todo: Card valor entrada - despesas
-                    CardPattern(
-                        const Text('Resultado'),
-                        Colors.white,
-                        transactionController.getTotalIncoming -
-                            transactionController.getTotalOutcoming),
-                    //Todo: Card valor de saída
-                    CardPattern(const Text('Saída'), Colors.red,
-                        transactionController.getTotalOutcoming),
-                  ],
+              children: const [
+                CardValuesHome(),
+                // ! Espaço entre os cards e a linha abaixo
+                SizedBox(
+                  height: 30,
                 ),
-                ListView.builder(
-                    //? Aqui resolveu o erro q n estava aparecendo
-                    shrinkWrap: true,
-                    itemBuilder: (_, index) => Dismissible(
-                          key: ValueKey<Transaction>(
-                              transactionController.transactions[index]),
-                          direction: DismissDirection.endToStart,
-                          resizeDuration: const Duration(seconds: 1),
-                          onDismissed: (direction) =>
-                              transactionController.removeByPosition(index),
-                          child: ItemTransaction(
-                            transactionController.transactions[index],
-                            key: ValueKey<int>(index),
-                          ),
-                        ),
-                    itemCount: transactionController.transactions.length)
+                // ! Linha que dividi as informações da Home.
+                Divider(
+                  height: 40,
+                  thickness: 2,
+                  indent: 10,
+                  endIndent: 10,
+                  color: Colors.red,
+                ),
+                // ! Espaço entre a linha abaixo e os lançamentos
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 9.0),
+                  child: Text(
+                    "Últimos Lançamentos",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.red,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                // ! Espaço entre a linha abaixo e os lançamentos
+                SizedBox(
+                  height: 20,
+                ),
+                // ? Chamando a tela de cards com lançamento
+                CardValuesReleases(),
+                SizedBox(
+                  height: 10,
+                ),
+                CardValuesReleases(),
+                SizedBox(
+                  height: 10,
+                ),
+                CardValuesReleases(),
+                SizedBox(
+                  height: 10,
+                ),
+                CardValuesReleases(),
               ],
             ),
           ),

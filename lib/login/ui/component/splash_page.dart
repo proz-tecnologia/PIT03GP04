@@ -1,5 +1,9 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+// <<<<<<<< HEAD:lib/login/ui/pages/splash_page.dart
+// import 'package:four_finance_app/login/ui/pages/login_page.dart';
+// ========
+// >>>>>>>> estruturando_projeto:lib/login/ui/component/splash_page.dart
 import 'package:lottie/lottie.dart';
 
 import '../pages/login_page.dart';
