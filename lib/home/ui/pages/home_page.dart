@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int indexGrafico = 0;
-  //Instanciamos a HOME CONTROLLER
+  //Todo: Instanciamos a HOME CONTROLLER
 
   Map<String, double> listaValores = {
     'Alimentação': 667.89,

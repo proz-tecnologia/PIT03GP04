@@ -4,8 +4,7 @@ import 'package:uuid/uuid.dart';
 
 class Category {
   String id = const Uuid().v4();
-  String? name;
-  CategoryType? categoryType;
-}
+  String? category;
 
-enum CategoryType { INCOME, EXPENSE }
+  Category({this.category = "Não definido"});
+}

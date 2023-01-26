@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+
+import '../../categogory/data/models/category.dart';
 import '../models/transaction.model.dart';
 
 class TransactionController extends ChangeNotifier {
   final List<Transaction> _transaction = [];
+  final List<Category> _categories = [];
 
   List<Transaction> get transactions => _transaction;
+  List<Category> get categories => _categories;
 
   //Todo: pegando o total de entrada
   double get getTotalIncoming {

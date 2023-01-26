@@ -84,9 +84,19 @@ class _DrawerViewState extends State<DrawerView> {
                         leading: Icon(Icons.account_balance),
                         title: Text('Contas'),
                       ),
-                      const ListTile(
-                        leading: Icon(Icons.credit_card_sharp),
-                        title: Text('Cartões'),
+                      ListTile(
+                        leading: const Icon(Icons.label),
+                        title: const Text('Categorias Lista'),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/category_list');
+                        },
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.label),
+                        title: const Text('Categoria Cadastrar'),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/category_create');
+                        },
                       ),
                       ListTile(
                         leading: const Icon(Icons.paid),

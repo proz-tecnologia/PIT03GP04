@@ -2,21 +2,25 @@
 
 import 'package:uuid/uuid.dart';
 
+import '../../categogory/data/models/category.dart';
+
 class Transaction {
-  //Campos da classe q vamos observar com MOBX
+  //Todo: Campos da classe q vamos observar com MOBX
 
   String id = const Uuid().v4();
   TransactionType transactionType;
   DateTime? dateTime;
+  Category? category;
   String description;
   double valueTransaction;
 
-  //Necessario ter o construtor dos atributos da classe
+  //Todo: Necessario ter o construtor dos atributos da classe
   Transaction({
     this.transactionType = TransactionType.INCOME,
     this.dateTime,
+    this.category,
     this.description = '',
-    this.valueTransaction = 0,
+    this.valueTransaction = 0.0,
   });
 }
 
