@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 
 class Category {
   String id = const Uuid().v4();
-  String? category;
+  String category;
 
   Category({this.category = "Não definido"});
 }

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:four_finance_app/Transaction/controller/transaction.controller.dart';
+import 'package:provider/provider.dart';
 
-class CardValuesReleases extends StatelessWidget {
+class CardValuesReleases extends StatefulWidget {
   const CardValuesReleases({super.key});
 
+  @override
+  State<CardValuesReleases> createState() => _CardValuesReleasesState();
+}
+
+class _CardValuesReleasesState extends State<CardValuesReleases> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,81 +20,87 @@ class CardValuesReleases extends StatelessWidget {
       ),
       width: 400,
       height: 80,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: Consumer<TransactionController>(
+        builder: (context, transactionController, child) =>
+            SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
               children: [
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Align(
-                      widthFactor: 1.1,
-                      heightFactor: 1.5,
-                      child: Text(
-                        "Educandário Brasileirinho",
-                        style: TextStyle(
-                          fontSize: 16,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Align(
+                          widthFactor: 1.1,
+                          heightFactor: 1.5,
+                          child: Text(
+                            'Teste',
+                            // "${transactionController.transactions[0].[0]}" ?? '',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Align(
+                          widthFactor: 1.4,
+                          heightFactor: 1.6,
+                          child: Text(
+                            "Escola",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Align(
-                      widthFactor: 1.4,
-                      heightFactor: 1.6,
-                      child: Text(
-                        "Escola",
-                        style: TextStyle(
-                          fontSize: 16,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Align(
+                          widthFactor: 1.3,
+                          heightFactor: 1.4,
+                          child: Text(
+                            "03/01/2023",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Align(
+                          widthFactor: 1.3,
+                          heightFactor: 1.6,
+                          child: Text(
+                            "R\$ 12.235,00",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Align(
-                      widthFactor: 1.3,
-                      heightFactor: 1.4,
-                      child: Text(
-                        "03/01/2023",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Align(
-                      widthFactor: 1.3,
-                      heightFactor: 1.6,
-                      child: Text(
-                        "R\$ 12.235,00",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );

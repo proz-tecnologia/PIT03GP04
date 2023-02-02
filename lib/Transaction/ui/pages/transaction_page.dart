@@ -1,6 +1,8 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:four_finance_app/Transaction/controller/transaction.controller.dart';
+import 'package:four_finance_app/categogory/blocs/controllers/category.controller.dart';
+import 'package:four_finance_app/categogory/data/models/category.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -24,8 +26,12 @@ class _NewTransactionPageState extends State<TransactionPage> {
 
   var _transactionType = TransactionType.INCOME;
   var _valueTransaction = 0.0;
+  Category? _category;
+  var _categoryValue = '';
   var _description = "";
   var _dateTime = DateTime.now();
+
+  final _transactionAddCategory = TransactionController();
 
   final _txtDateTimeController = TextEditingController();
 
@@ -51,17 +57,20 @@ class _NewTransactionPageState extends State<TransactionPage> {
                 children: _transactionTypes
                     .map(
                       (e) => ChoiceChip(
-                          selectedColor: e.color,
-                          labelStyle: const TextStyle(color: Colors.white),
-                          label: Container(
-                              alignment: AlignmentDirectional.center,
-                              width: 180,
-                              height: 60,
-                              child: Text(e.label)),
-                          selected: e.type == _transactionType,
-                          onSelected: (value) => setState(() {
-                                _transactionType = e.type;
-                              })),
+                        selectedColor: e.color,
+                        labelStyle: const TextStyle(color: Colors.white),
+                        label: Container(
+                            alignment: AlignmentDirectional.center,
+                            width: 180,
+                            height: 60,
+                            child: Text(e.label)),
+                        selected: e.type == _transactionType,
+                        onSelected: (value) => setState(
+                          () {
+                            _transactionType = e.type;
+                          },
+                        ),
+                      ),
                     )
                     .toList(),
               ),
@@ -103,6 +112,31 @@ class _NewTransactionPageState extends State<TransactionPage> {
                     newValue!.replaceAll('.', '').replaceAll(',', '.')),
               ),
               const SizedBox(height: 32),
+              const Text('Categoria'),
+              Consumer<CategoryController>(
+                  builder: (context, categoryController, child) {
+                return DropdownButtonFormField<Category>(
+                  // controller: _categoryValue,
+                  items: categoryController.categories
+                      .map((e) => DropdownMenuItem<Category>(
+                          value: e, child: Text(e.category)))
+                      .toList(),
+                  value: _category,
+                  onChanged: (newValue) => _category = newValue,
+                  hint: const Text('Selecione'),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Selecione uma categoria';
+                    }
+                    return null;
+                  },
+                  onSaved: (newValue) => _category = newValue,
+                );
+              }),
+              const SizedBox(
+                height: 32,
+              ),
               TextFormField(
                 controller: _txtDateTimeController,
                 keyboardType: TextInputType.datetime,
@@ -167,19 +201,19 @@ class _NewTransactionPageState extends State<TransactionPage> {
                     width: 190,
                     height: 60,
                     child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed('/home');
-                        },
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.blue),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(90),
-                            ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed('/home');
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.blue),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(90),
                           ),
                         ),
-                        child: const Text('Cancelar')),
+                      ),
+                      child: const Text('Cancelar'),
+                    ),
                   ),
                 ],
               ),

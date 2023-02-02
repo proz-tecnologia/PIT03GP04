@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:four_finance_app/categogory/blocs/controllers/category.controller.dart';
+// import 'package:four_finance_app/categogory/data/mocks/category_mock.dart';
 
-import '../../categogory/data/models/category.dart';
+// import '../../categogory/data/models/category.dart';
 import '../models/transaction.model.dart';
 
 class TransactionController extends ChangeNotifier {
   final List<Transaction> _transaction = [];
-  final List<Category> _categories = [];
+  final List<CategoryController> _categories = [];
 
   List<Transaction> get transactions => _transaction;
-  List<Category> get categories => _categories;
+  List<CategoryController> get categories => _categories;
+
+  // TransactionController() {
+  //   _categories.addAll(CategoryControlle);
+  //   notifyListeners();
+  //   debugPrint(_categories.toString());
+  // }
 
   //Todo: pegando o total de entrada
   double get getTotalIncoming {
