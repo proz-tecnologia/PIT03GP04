@@ -1,4 +1,10 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:four_finance_app/components/custom_alert_dialog.component.dart';
+import 'package:four_finance_app/components/progress_dialog.component.dart';
+import 'package:four_finance_app/controller/login.controller.dart';
 import 'package:four_finance_app/src/models/login_store.dart';
 import 'package:four_finance_app/widget/text.form.field.padrao.dart';
 import 'package:provider/provider.dart';
@@ -15,11 +21,30 @@ class _LoginPageState extends State<LoginPage> {
   //Chamando a CLASSE LOGIN q contém o MOBX, foi removido (= LoginStore();), por conta do PROVIDER
   late LoginStore loginStore;
 
+  final _controller = LoginController();
+
+  final _progresDialog = ProgressDialog();
+  final _alesrtDialog = CustomAlertDialog();
+
+  StreamSubscription? _streamSubscriprion;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => preload());
+  }
+
   //usado p transitar dados com MOBX o PROVIDER é necessário
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     loginStore = Provider.of<LoginStore>(context);
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    if (_streamSubscriprion != null) await _streamSubscriprion!.cancel();
   }
 
   //Chave do formulario p usar em validar os campos
@@ -55,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               const SizedBox(height: 32),
                               TextFormField(
+                                  onChanged: _controller.changeEmail,
                                   //Usando VALIDATORLESS
                                   validator: Validatorless.multiple([
                                     Validatorless.required(
@@ -62,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                                     Validatorless.email('E-mail Inválido.'),
                                   ]),
                                   //Pegando o SET da CLASSE LOGIN com MOBX
-                                  onChanged: loginStore.setEmail,
+                                  //onChanged: loginStore.setEmail,
                                   decoration: const InputDecoration(
                                     labelText: 'E-mail',
                                     border: OutlineInputBorder(
@@ -74,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                   )),
                               const SizedBox(height: 32),
                               TextFormField(
+                                onChanged: _controller.changePassword,
                                 //Usando o VALIDATORLESS
                                 validator: Validatorless.multiple([
                                   Validatorless.required('Senha Obrigatória.'),
@@ -81,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                                       'Senha deve ter no mínimo 5 caracteres.')
                                 ]),
                                 //Pegando o SET da CLASSE LOGIN com MOBX
-                                onChanged: loginStore.setPassword,
+                                //onChanged: loginStore.setPassword,
                                 decoration: InputDecoration(
                                     labelText: 'Senha',
                                     border: const OutlineInputBorder(
@@ -109,15 +136,16 @@ class _LoginPageState extends State<LoginPage> {
                               SizedBox(
                                 width: 190,
                                 height: 60,
+                                //Aqui
                                 child: ElevatedButton(
-                                    onPressed: () {
-                                      //var formValid = _formKey.currentState?.validate();
-                                      //validação dos campos do formulario
-                                      if (_formKey.currentState!.validate()) {
-                                        Navigator.of(context)
-                                            .pushReplacementNamed('/home');
-                                      }
-                                    },
+                                    onPressed: _doLogin, //() {
+                                    //var formValid = _formKey.currentState?.validate();
+                                    //validação dos campos do formulario
+                                    // if (_formKey.currentState!.validate()) {
+                                    //Navigator.of(context)
+                                    //     .pushReplacementNamed('/home');
+                                    // }
+                                    //},
                                     style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
@@ -173,5 +201,27 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ))));
+  }
+
+  Future preload() async {
+    _streamSubscriprion =
+        FirebaseAuth.instance.authStateChanges().listen((user) async {
+      if (user != null) {
+        await _streamSubscriprion!.cancel();
+        Navigator.pushReplacementNamed(context, '/home');
+      }
+    });
+  }
+
+  _doLogin() async {
+    _progresDialog.show("Autenticando");
+    final response = await _controller.doLogin();
+    if (response.isSuccess) {
+      print('passou por aqui');
+    } else {
+      print('Deu errado');
+      _progresDialog.hide();
+      _alesrtDialog.showInfo(title: "oxe", message: response.message!);
+    }
   }
 }

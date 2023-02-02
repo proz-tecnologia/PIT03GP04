@@ -50,19 +50,21 @@ class _NewTransactionPageState extends State<TransactionPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: _transactionTypes
                           .map(
-                            (e) => ChoiceChip(
-                                selectedColor: e.color,
-                                labelStyle:
-                                    const TextStyle(color: Colors.white),
-                                label: Container(
-                                    alignment: AlignmentDirectional.center,
-                                    width: 180,
-                                    height: 60,
-                                    child: Text(e.label)),
-                                selected: e.type == _transactionType,
-                                onSelected: (value) => setState(() {
-                                      _transactionType = e.type;
-                                    })),
+                            (e) => Expanded(
+                              child: ChoiceChip(
+                                  selectedColor: e.color,
+                                  labelStyle:
+                                      const TextStyle(color: Colors.white),
+                                  label: Container(
+                                      alignment: AlignmentDirectional.center,
+                                      width: 180,
+                                      height: 60,
+                                      child: Text(e.label)),
+                                  selected: e.type == _transactionType,
+                                  onSelected: (value) => setState(() {
+                                        _transactionType = e.type;
+                                      })),
+                            ),
                           )
                           .toList(),
                     ),
@@ -129,7 +131,7 @@ class _NewTransactionPageState extends State<TransactionPage> {
                     ),
                     const SizedBox(height: 32),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
                           width: 190,
@@ -163,22 +165,24 @@ class _NewTransactionPageState extends State<TransactionPage> {
                             child: const Text('Lançar'),
                           ),
                         ),
-                        SizedBox(
-                          width: 190,
-                          height: 60,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/home');
-                              },
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.blue),
-                                  shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(90)))),
-                              child: Text('Cancelar')),
+                        Center(
+                          child: SizedBox(
+                            width: 190,
+                            height: 60,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushReplacementNamed('/home');
+                                },
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all(Colors.blue),
+                                    shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(90)))),
+                                child: Text('Cancelar')),
+                          ),
                         ),
                       ],
                     ),

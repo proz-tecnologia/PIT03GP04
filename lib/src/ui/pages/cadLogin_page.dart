@@ -1,35 +1,47 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:four_finance_app/components/custom_alert_dialog.component.dart';
+import 'package:four_finance_app/components/progress_dialog.component.dart';
+import 'package:four_finance_app/controller/cadLogin.controller.dart';
 import 'package:four_finance_app/src/models/login_store.dart';
+import 'package:four_finance_app/store/user.store.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:flutter/material.dart';
 
-class CadUsuarioPage extends StatefulWidget {
-  const CadUsuarioPage({super.key});
+class CadUsuarioPage extends StatelessWidget {
+  CadUsuarioPage({super.key});
 
-  @override
-  State<CadUsuarioPage> createState() => _CadUsuarioPageState();
-}
+  //@override
+  // State<CadUsuarioPage> createState() => _CadUsuarioPageState();
+//}
 
-class _CadUsuarioPageState extends State<CadUsuarioPage> {
+//class _CadUsuarioPageState extends State<CadUsuarioPage> {
   //Chamando a CLASSE LOGIN q contém o MOBX, foi removido (= LoginStore();), por conta do PROVIDER
-  late LoginStore loginStore;
+  //late LoginStore loginStore;
 
   //usado p transitar dados com MOBX o PROVIDER é necessário
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    loginStore = Provider.of<LoginStore>(context);
-  }
+  // @override
+  // void didChangeDependencies() {
+  //  super.didChangeDependencies();
+  //  loginStore = Provider.of<LoginStore>(context);
+  // }
 
   //chave global
   final _formKey = GlobalKey<FormState>();
   //Controlar dos campos digitaveis
-  final _nameUsuarioController = TextEditingController();
-  final _emailController = TextEditingController();
+  //final _nameUsuarioController = TextEditingController();
+  //final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
   final _confirmSenhaController = TextEditingController();
 
-  bool _canShowPassword = false;
+  //Tudo p o FIREBASE
+  final _controllerRegister = CadLoginController();
+  final _progressDialog = ProgressDialog();
+  final _alertDialog = CustomAlertDialog();
+  //final _firebaseAuth = FirebaseAuth.instance;
+
+  final bool _canShowPassword = false;
+
 /*
   @override
   void dispose() {
@@ -68,6 +80,8 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                         ),
                         const SizedBox(height: 24),
                         TextFormField(
+                          //pegando o digitado p enviar ao FIREBASE
+                          onChanged: _controllerRegister.changeName,
                           validator: Validatorless.multiple([
                             Validatorless.required(
                                 'Nome do usuário é obrigatório.'),
@@ -75,8 +89,8 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                                 'Nome do usuário deve ter no mínimo 5 caracteres.')
                           ]),
                           //Faz parte do MOBX para setar o NOME USUARIO
-                          onChanged: loginStore.setNameUser,
-                          controller: _nameUsuarioController,
+                          //onChanged: loginStore.setNameUser,
+                          //controller: _nameUsuarioController,
                           decoration: const InputDecoration(
                             labelText: 'Nome Usuário',
                             border: OutlineInputBorder(
@@ -89,13 +103,15 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                         ),
                         const SizedBox(height: 24),
                         TextFormField(
+                          //Pegando o digitado p enviar ao FIREBASE
+                          onChanged: _controllerRegister.changeEmail,
                           validator: Validatorless.multiple([
                             Validatorless.required('E-mail obrigatório.'),
                             Validatorless.email('E-mail inválido.'),
                           ]),
                           //Faz parte d MOBX p setar o EMAIL
-                          onChanged: loginStore.setEmail,
-                          controller: _emailController,
+                          //onChanged: loginStore.setEmail,
+                          //controller: _emailController,
                           decoration: const InputDecoration(
                             labelText: 'E-mail',
                             border: OutlineInputBorder(
@@ -108,10 +124,12 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                         ),
                         const SizedBox(height: 24),
                         TextFormField(
+                          //Pegando o digitado p enviar ao FIREBASE
+                          onChanged: _controllerRegister.changePassword,
                           validator: Validatorless.multiple([
                             Validatorless.required('Senha obrigatória.'),
                             Validatorless.min(
-                                5, 'Senha deve ter no mínimo 5 caracteres.')
+                                6, 'Senha deve ter no mínimo 6 caracteres.')
                           ]),
                           controller: _senhaController,
                           decoration: InputDecoration(
@@ -125,9 +143,9 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                               //exibir e escondr senha
                               suffixIcon: IconButton(
                                 onPressed: () {
-                                  setState(() {
-                                    _canShowPassword = !_canShowPassword;
-                                  });
+                                  // setState(() {
+                                  //   _canShowPassword = !_canShowPassword;
+                                  // });
                                 },
                                 icon: Icon(
                                   _canShowPassword
@@ -139,10 +157,12 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                         ),
                         const SizedBox(height: 24),
                         TextFormField(
+                          //Pegando o digitado p enviar ao FIREBASE
+                          onChanged: _controllerRegister.changeRepeatPassword,
                           validator: Validatorless.multiple([
                             Validatorless.required('Senha obrigatória.'),
                             Validatorless.min(
-                                5, 'Senha deve ter no mínimo 5 caracteres.'),
+                                6, 'Senha deve ter no mínimo 6 caracteres.'),
                             Validatorless.compare(_senhaController,
                                 'Senha diferente do confirma senha.')
                           ]),
@@ -158,9 +178,9 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                               ),
                               suffixIcon: IconButton(
                                 onPressed: () {
-                                  setState(() {
-                                    _canShowPassword = !_canShowPassword;
-                                  });
+                                  // setState(() {
+                                  //   _canShowPassword = !_canShowPassword;
+                                  //});
                                 },
                                 icon: Icon(
                                   _canShowPassword
@@ -177,12 +197,16 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
                           child: ElevatedButton(
                               onPressed: () {
                                 // var formValid =
-                                //   _formKey.currentState?.validate() ?? false;
+                                //_formKey.currentState?.validate() ?? false;
                                 //validação dos campos do formulario
                                 if (_formKey.currentState!.validate()) {
+                                  _doRegister();
                                   Navigator.of(context)
                                       .pushReplacementNamed('/home');
                                 }
+
+                                // Navigator.pushReplacementNamed(
+                                //   context, '/home');
                               },
                               style: ButtonStyle(
                                   backgroundColor:
@@ -209,5 +233,19 @@ class _CadUsuarioPageState extends State<CadUsuarioPage> {
         ),
       ),
     );
+  }
+
+  _doRegister() async {
+    final response = await _controllerRegister.doRegister();
+    await _progressDialog.show("Efetuando Cadastro");
+
+    if (response.isSuccess) {
+      print('Conta criada com sucesso');
+      //Navigator.pushReplacementNamed('/home');
+    } else {
+      await _progressDialog.hide();
+      await _alertDialog.showInfo(
+          title: "Deu merda", message: response.message!);
+    }
   }
 }

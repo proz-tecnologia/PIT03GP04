@@ -3,6 +3,7 @@ import 'package:four_finance_app/controller/transaction.controller.dart';
 import 'package:four_finance_app/src/models/transaction.model.dart';
 import 'package:four_finance_app/src/util/string.dart';
 import 'package:four_finance_app/widget/card.pattern.widget.dart';
+import 'package:four_finance_app/widget/card_result.dart';
 import 'package:four_finance_app/widget/drawer_page.dart';
 import 'package:four_finance_app/widget/item.transaction.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -50,20 +51,15 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          CardPattern(Text('Entrada'), Colors.green,
-                              transactionController.getTotalIncoming),
-                          //Card valor entrada - despesas
-                          CardPattern(
-                              Text('Resultado'),
-                              Colors.white,
-                              transactionController.getTotalIncoming -
-                                  transactionController.getTotalOutcoming),
-                          //Card valor de saída
-                          CardPattern(Text('Saída'), Colors.red,
-                              transactionController.getTotalOutcoming),
+                          CardResult(
+                            incomingValue:
+                                transactionController.getTotalIncoming,
+                            outcomingValue:
+                                transactionController.getTotalOutcoming,
+                          ),
                         ],
                       ),
                       ListView.builder(
@@ -72,8 +68,10 @@ class _HomePageState extends State<HomePage> {
                         itemBuilder: (_, index) => Dismissible(
                           key: ValueKey<Transaction>(
                               transactionController.transactions[index]),
-                          //direction: DismissDirection.endToStart,
+                          direction: DismissDirection.endToStart,
                           resizeDuration: Duration(seconds: 1),
+                          onDismissed: (direction) =>
+                              transactionController.removeByPosition(index),
                           child: ItemTransaction(
                             transactionController.transactions[index],
                             key: ValueKey<int>(index),

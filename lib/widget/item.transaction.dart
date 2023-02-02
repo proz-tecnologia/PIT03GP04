@@ -20,12 +20,19 @@ class ItemTransaction extends StatelessWidget {
       child: ListTile(
           leading: Text(
             '${transaction.dateTime?.day}/${transaction.dateTime?.month}/${transaction.dateTime?.year}',
+            style: TextStyle(fontSize: 18),
           ),
           //'${widget.transactionStore.dateTime?.day}/${widget.transactionStore.dateTime?.month}'),
           isThreeLine: true,
-          title: Text(transaction.description),
+          title: Text(
+            transaction.description,
+            style: TextStyle(fontSize: 18),
+          ),
           //Tá no final esse GET
-          subtitle: Text(getValue()),
+          subtitle: Text(
+            getValue(),
+            style: TextStyle(fontSize: 18),
+          ),
           trailing: FittedBox(
               fit: BoxFit.fill,
               child: Consumer<TransactionController>(
