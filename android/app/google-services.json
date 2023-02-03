@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "782697120614",
+    "firebase_url": "https://for-finance-6285f-default-rtdb.firebaseio.com",
+    "project_id": "for-finance-6285f",
+    "storage_bucket": "for-finance-6285f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782697120614:android:ea2e508f22e9c9a29ffea7",
+        "android_client_info": {
+          "package_name": "com.example.four_finance_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782697120614-gsp1p4ajpv5v5curhftt31cmlnb09mgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADZkX2f5RqLDE7qn8Gq6TQiWsiYuFVdPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782697120614-gsp1p4ajpv5v5curhftt31cmlnb09mgt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
