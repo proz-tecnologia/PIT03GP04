@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:four_finance_app/controller/transaction.controller.dart';
 import 'package:four_finance_app/src/models/transaction.model.dart';
 import 'package:four_finance_app/widget/card.pattern.widget.dart';
+import 'package:four_finance_app/widget/card_result.dart';
 import 'package:four_finance_app/widget/drawer_page.dart';
 import 'package:four_finance_app/widget/item.transaction.dart';
 import 'package:provider/provider.dart';

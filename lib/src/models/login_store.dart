@@ -1,7 +1,7 @@
-import 'package:mobx/mobx.dart';
+/*import 'package:mobx/mobx.dart';
 import 'package:flutter/foundation.dart';
 
-part 'login_store.g.dart';
+//part 'login_store.g.dart';
 
 class LoginStore = _LoginStore with _$LoginStore;
 
@@ -17,11 +17,35 @@ abstract class _LoginStore with Store {
   @observable
   String nameUser = '';
   String email = '';
-  String password = '';
+  // String password = '';
 
-  //setando as informações do OBSERVER com MOBX
-  @action
-  void setNameUser(String value) => nameUser = value;
-  void setEmail(String value) => email = value;
-  void setPassword(String value) => password = value;
+  LoginStore({this.nameUser = '', this.email = ''});
+
+  LoginStore.fromFirestore(Map<String, dynamic> map) {
+    nameUser = map['nameUser'] ?? "";
+    email = map['email'] ?? "";
+    //password = map['password'] ?? "";
+  }
+
+  Map<String, dynamic> toMap() {
+    return {'nameUser': nameUser, 'email': email};
+  }
+}*/
+
+class LoginStore {
+  String nameUser = '';
+  String email = '';
+  // String password = '';
+
+  LoginStore({this.nameUser = '', this.email = ''});
+
+  LoginStore.fromFirestore(Map<String, dynamic> map) {
+    nameUser = map['nameUser'] ?? "";
+    email = map['email'] ?? "";
+    //password = map['password'] ?? "";
+  }
+
+  Map<String, dynamic> toMap() {
+    return {'nameUser': nameUser, 'email': email};
+  }
 }
