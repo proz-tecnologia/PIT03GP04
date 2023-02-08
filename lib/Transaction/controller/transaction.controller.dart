@@ -13,7 +13,7 @@ class TransactionController extends ChangeNotifier {
   List<CategoryController> get categories => _categories;
 
   // TransactionController() {
-  //   _categories.addAll(CategoryControlle);
+  //   _categories.addAll(CategoryController);
   //   notifyListeners();
   //   debugPrint(_categories.toString());
   // }

@@ -18,18 +18,8 @@ class TransactionPage extends StatefulWidget {
 
 class _NewTransactionPageState extends State<TransactionPage> {
   final _transactionTypes = [
-    // TransactionTypeOption("Receita", TransactionType.INCOME, Colors.green),
-    // TransactionTypeOption("Despesa", TransactionType.EXPENSE, Colors.red)
-    TransactionTypeOption(
-        "Receita",
-        TransactionType.INCOME,
-        const Color.fromRGBO(217, 217, 217, 100),
-        const Color.fromRGBO(0, 208, 58, 100)),
-    TransactionTypeOption(
-        "Despesa",
-        TransactionType.EXPENSE,
-        const Color.fromRGBO(217, 217, 217, 100),
-        const Color.fromARGB(255, 244, 67, 54))
+    TransactionTypeOption("Receita", TransactionType.INCOME, Colors.green),
+    TransactionTypeOption("Despesa", TransactionType.EXPENSE, Colors.red)
   ];
 
   final _formKey = GlobalKey<FormState>();
@@ -80,21 +70,15 @@ class _NewTransactionPageState extends State<TransactionPage> {
                                   (e) => ChoiceChip(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8.0),
-                                      side: BorderSide(
-                                        color: e.borderAndTextColor,
-                                        width: 3.0,
-                                      ),
                                     ),
                                     selectedColor: e.color,
-                                    labelStyle: TextStyle(
-                                        color: e.borderAndTextColor,
-                                        fontSize: 16),
+                                    labelStyle:
+                                        const TextStyle(color: Colors.white),
                                     label: Container(
-                                      alignment: AlignmentDirectional.center,
-                                      width: 100,
-                                      height: 50,
-                                      child: Text(e.label),
-                                    ),
+                                        alignment: AlignmentDirectional.center,
+                                        width: 100,
+                                        height: 50,
+                                        child: Text(e.label)),
                                     selected: e.type == _transactionType,
                                     onSelected: (value) => setState(
                                       () {
@@ -195,25 +179,6 @@ class _NewTransactionPageState extends State<TransactionPage> {
                               SizedBox(
                                 width: 130,
                                 height: 55,
-                                //! Botão cancelar
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.of(context)
-                                        .pushReplacementNamed('/home');
-                                  },
-                                  child: const Text(
-                                    'Cancelar',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 130,
-                                height: 55,
-                                //! Botão Lançar
                                 child: OutlinedButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
@@ -244,6 +209,23 @@ class _NewTransactionPageState extends State<TransactionPage> {
                                   ),
                                 ),
                               ),
+                              SizedBox(
+                                width: 130,
+                                height: 55,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushReplacementNamed('/home');
+                                  },
+                                  child: const Text(
+                                    'Cancelar',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ]),
@@ -263,12 +245,6 @@ class TransactionTypeOption {
   String label;
   TransactionType type;
   Color color;
-  Color borderAndTextColor;
 
-  TransactionTypeOption(
-    this.label,
-    this.type,
-    this.color,
-    this.borderAndTextColor,
-  );
+  TransactionTypeOption(this.label, this.type, this.color);
 }
