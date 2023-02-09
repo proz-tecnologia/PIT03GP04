@@ -12,11 +12,12 @@ class TransactionController extends ChangeNotifier {
   List<Transaction> get transactions => _transaction;
   List<CategoryController> get categories => _categories;
 
-  // TransactionController() {
-  //   _categories.addAll(CategoryController);
-  //   notifyListeners();
-  //   debugPrint(_categories.toString());
-  // }
+  TransactionController() {
+    // _categories.addAll(CategoryController);
+    // notifyListeners();
+    debugPrint('Imprimindo as categorias: $_categories.toString()');
+    debugPrint('Imprimindo os lançamentos: $_transaction.toString()');
+  }
 
   //Todo: pegando o total de entrada
   double get getTotalIncoming {
